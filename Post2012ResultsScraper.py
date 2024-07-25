@@ -1,0 +1,1 @@
+#File for scraping newer HTML format of IBJJF results pages. Roughly 2012 onward. Without table objects.
