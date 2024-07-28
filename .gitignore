@@ -1,2 +1,2 @@
 #git ignore file for BJJ Absolute Class Analysis Project
-#not currently ignoring any files.
+__pycache__/
