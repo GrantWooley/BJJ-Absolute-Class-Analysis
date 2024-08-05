@@ -123,7 +123,6 @@ def LegacyScrape(URL):
     return df
 
 
-URL = "http://ibjjf.com/events/results/2002-campeonato-brasileiro-de-jiu-jitsu"
+#Need to Debug this URL.
+#URL = "http://ibjjf.com/events/results/2002-campeonato-brasileiro-de-jiu-jitsu"
 
-df = LegacyScrape(URL)
-print(df.head)

@@ -144,12 +144,3 @@ def ModernScrape(URL):
     return df
 
 
-
-URL = 'https://www.ibjjfdb.com/ChampionshipResults/2025/PublicResults'
-
-
-df = ModernScrape(URL)
-File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
-print(File)
-
-
