@@ -121,3 +121,9 @@ def LegacyScrape(URL):
     #Reseting df index and returning df.
     df = df.reset_index(drop = True)
     return df
+
+
+URL = "http://ibjjf.com/events/results/2002-campeonato-brasileiro-de-jiu-jitsu"
+
+df = LegacyScrape(URL)
+print(df.head)

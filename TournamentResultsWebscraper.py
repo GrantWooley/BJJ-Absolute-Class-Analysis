@@ -6,6 +6,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import Pre2012ResultsScraper as OScraper
+import Post2012ResultsScraper as NScraper
 
 #Open Connection to the primary IBJJF Event Results Webpage
 DirectoryURL = "https://ibjjf.com/events/results"
@@ -47,14 +48,20 @@ for URL in ResultsURLs:
     CheckURL = URL.rsplit("/",1)
     if CheckURL[1] == 'PublicResults':
         #Run Webscraper set up for new format.
-            pass
+        print("Scraping: " + URL)
+        df = NScraper.ModernScrape(URL)
+        #Access first row, and columns Tournament, Year of df to set the file name. 
+        File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
+        df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
+        print(File + " saved.")    
     else:
         #Run webscraper set up for old format.
         print("Scraping: " + URL)
         df = OScraper.LegacyScrape(URL)
-        File = URL.rsplit('/',1)
-        File = File[1]
+        #Access first row, and columns Tournament, Year of df to set the file name. 
+        File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
         df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
         print(File + " saved.")
+        
 
 
