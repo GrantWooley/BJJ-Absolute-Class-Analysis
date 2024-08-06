@@ -12,3 +12,6 @@ The project will ultimately contain the following:
 4.Setting up of Microsoft SQL DB
 5.Power BI or Possibly Python Dashboard where I take data from MSSQL DB and visualize and do analysis to answer
 the question "How much do you need to weigh to win a the absolute class at a major BJJ tournament."
+
+#Updates
+8.5.24 Completed development of all webscraping .py files and successfully scraped all IBJJF major tournament web pages.
