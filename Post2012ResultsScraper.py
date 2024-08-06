@@ -4,7 +4,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup 
 import pandas as pd
-
+import numpy as np
 
 #Defining file as function to call in Main TournamentResultsWebscraper file.
 
@@ -120,8 +120,11 @@ def ModernScrape(URL):
     #Filtering df to only Adult divisions that contain Black Belt, 
     #as analys will only be for top level competition.
     #Female Divsions in early tournmaent years were combined belts. I.E. Brown Black, Purple Brown Black categories.
-    df = df[df['Belt'].str.contains('Black', na = False) ]
-    df = df[df['Age'] == 'Adult']
+    #Brazilian Nationals Results are stored in Portugese so, need to filter for bothn English and Portugese words.
+    df = df[(df['Belt'].str.contains('Black', na = False)) | (df['Belt'].str.contains('Preta', na = False))]
+    #On one web page, Adult is misspelled as Asult. Filtering for this page and doing data cleansing to correct these records.
+    df = df[(df['Age'] == 'Adult') | (df['Age'] == 'Adulto') | (df['Age'] == 'Asult')]
+    df['Age'] = np.where(df['Age']== 'Asult', 'Adult', df['Age'])
 
 
     #Getting the title that contains both tournament name and year.

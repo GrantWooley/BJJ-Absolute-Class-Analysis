@@ -1,2 +1,5 @@
 #git ignore file for BJJ Absolute Class Analysis Project
 __pycache__/
+#Ignoring old scrape files, will remove when I am sure they are no longer needed.
+Post2012ResultsScraper.py
+Pre2012ResultsScraper.py

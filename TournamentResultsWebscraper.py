@@ -2,20 +2,21 @@
 #For Worlds, Pans, Europeans, Brazilian Nationals, No-Gi Worlds, No-Gi Pans, No-Gi Europeans, & No-Gi Brazilian Nationals
 #Male Black Belt Divisions
 
-#Import libraries and Webscraper files
+#Import libraries and Webscraper functions
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import Pre2012ResultsScraper as OScraper
-import Post2012ResultsScraper as NScraper
+import Scraper_Functions as sc
+
 
 #Open Connection to the primary IBJJF Event Results Webpage
 DirectoryURL = "https://ibjjf.com/events/results"
-Page = urlopen (DirectoryURL)
 
-#Get HTML
-Soup = BeautifulSoup(Page, "html.parser")
+#Get the Soup
+Soup = sc.GetSoup(DirectoryURL)
+
 #Getting all tags that have an asscocitaed results URLs
 tags = Soup.find_all('a',class_ = 'event-year-result')
+
 
 # List of Major Tournament names
 Tournaments =["World Jiu-Jitsu IBJJF Championship",
@@ -30,8 +31,8 @@ Tournaments =["World Jiu-Jitsu IBJJF Championship",
 
 
 #Storing links to results pages from any tag that has a data-n elemnet matching a major tournament.
-ResultsURLs = [tag['href'] for tag in tags  if any(Tournament in tag['data-n'] for Tournament in Tournaments)]
-
+#ResultsURLs = [tag['href'] for tag in tags  if any(Tournament in tag['data-n'] for Tournament in Tournaments)]
+ResultsURLs = [tag['href'] for tag in tags  if any(Tournament == tag['data-n'] for Tournament in Tournaments)]
 
 #IBJJF has two web page layouts. Around the year 2012 the HTML format/layout changed.
 #In the URLs for the results pages this is reflected. The older format web pages' URLs always end 
@@ -49,7 +50,13 @@ for URL in ResultsURLs:
     if CheckURL[1] == 'PublicResults':
         #Run Webscraper set up for new format.
         print("Scraping: " + URL)
-        df = NScraper.ModernScrape(URL)
+        #Try to connect to the URL, if you can't then continue to next iteration of the loop. 
+        try:
+            Soup = sc.GetSoup(URL)
+        except:
+            print("Unable to connect to webpage, continuing to next URL.") 
+            continue   
+        df = sc.ModernScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
         df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
@@ -57,11 +64,16 @@ for URL in ResultsURLs:
     else:
         #Run webscraper set up for old format.
         print("Scraping: " + URL)
-        df = OScraper.LegacyScrape(URL)
+        #Try to connect to the URL, if you can't then continue to next iteration of the loop. 
+        try:
+            Soup = sc.GetSoup(URL)
+        except:
+            print("Unable to connect to webpage,continuing to next URL.")
+            continue
+        df = sc.LegacyScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
         df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
         print(File + " saved.")
         
-
-
+print("All Web Pages Successfully Scraped!")
