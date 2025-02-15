@@ -43,6 +43,8 @@ ResultsURLs = [tag['href'] for tag in tags  if any(Tournament == tag['data-n'] f
 #Else use the web scraping file set up for the old HTML format/layout
 
 #Loop opening connections to every IBJJF Results Page for major tournaments, scraping the webpage, returning a dataframe, and saving as CSV.
+file_path = r"C:\Users\grant\OneDrive\Road To DE\Data Projects\BJJ Absolute Class Analysis\IBJJF Result Files"
+
 i = 0
 for URL in ResultsURLs:
     CheckURL = URL.rsplit("/",1)
@@ -58,7 +60,7 @@ for URL in ResultsURLs:
         df = sc.ModernScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
-        df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
+        df.to_excel(fr"{file_path}\{File}.xlsx", sheet_name= "Results", index= False)
         print(File + " saved.")    
     else:
         #Run webscraper set up for old format.
@@ -72,7 +74,7 @@ for URL in ResultsURLs:
         df = sc.LegacyScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
-        df.to_excel(fr"C:\Users\grant\OneDrive\Road To DE\Data Projects\IBJJF Result Files\{File}.xlsx", sheet_name= "Results", index= False)
+        df.to_excel(fr"{file_path}\{File}.xlsx", sheet_name= "Results", index= False)
         print(File + " saved.")
         
 print("All Web Pages Successfully Scraped!")
