@@ -25,7 +25,6 @@ Tournaments =["World Jiu-Jitsu IBJJF Championship",
      "Pan Jiu-Jitsu No-Gi IBJJF Championship",
      "European Jiu-Jitsu IBJJF Championship",
      "European Jiu-Jitsu No-Gi IBJJF Championship",
-     "European Jiu-Jitsu No-Gi IBJJF Championship",
      "Campeonato Brasileiro de Jiu-Jitsu",
      "Brazilian National Jiu-Jitsu No-Gi Championship"]
 
