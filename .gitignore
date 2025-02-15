@@ -3,3 +3,5 @@ __pycache__/
 #Ignoring old scrape files, will remove when I am sure they are no longer needed.
 Post2012ResultsScraper.py
 Pre2012ResultsScraper.py
+#Ignoring Data .xlsx files.
+IBJJF Result Files
