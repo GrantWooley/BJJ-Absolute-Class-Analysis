@@ -5,3 +5,5 @@ Post2012ResultsScraper.py
 Pre2012ResultsScraper.py
 #Ignoring Data .xlsx files.
 IBJJF Result Files
+#Ignoring Data Spell IDE files
+.idea
