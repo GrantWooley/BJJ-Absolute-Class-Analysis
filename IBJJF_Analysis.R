@@ -3,6 +3,7 @@ rm(list = ls())
 #FIXME Dont use all of tidyverse only the packages I need.
 library(tidyverse)
 library(data.table)
+#FIXME Update raw data files to
 library(readxl)
 
 Path_Main <- file.path(getwd())
@@ -23,17 +24,15 @@ dt_IBJFF_Weight_Classes <- data.table(
 dt_IBJFF_Weight_Classes <- dt_IBJFF_Weight_Classes[, UOM := "lbs"]
 
 
-List_Df <- list()
-
-for( File  in list.files(Path_Data)){
-  File <- file.path(Path_Data,File)
+Files_Raw_Data <- list.files(Path_Data)
+#Funciton read raw data files.
+File_Read_Results <- function (fileName,filePath){
+  File <- file.path(filePath,fileName)
   #FIXME Update Python scrapers to produce .csv files, then use fread for faster I/O
   df <- read_excel(File,sheet = 1)
-  List_Df[[length(List_Df) + 1]] <- df
 }
-
-dt_Results <- bind_rows(List_Df)
-setDT(dt_Results)
+dt_Results <- map(Files_Raw_Data,File_Read_Results,Path_Data)
+dt_Results <- bind_rows(dt_Results) %>% setDT()
 
 dt_Results <- dt_Results %>%
   rename_with( ~ gsub(" ","_", .x))
@@ -69,7 +68,7 @@ dt_Results <- dt_Results[ ,`:=`(
   Tournament = toupper(str_replace_all(Tournament, "-"," "))
 )
 ]
-#In 2009 for the CAMPEONATO BRASILEIRO DE JIU JITSU tournament. Several Female divisions only had on entrance. They were not giving a placing. However by default they would have placed 1st.
+#In 2009 for the CAMPEONATO BRASILEIRO DE JIU JITSU tournament. Several Female divisions only had one entrance. They were not giving a placing. However by default they would have placed 1st.
 #Correcting these NAs.
 dt_Results <- dt_Results[is.na(Placing), Placing := 1]
 
@@ -102,25 +101,27 @@ dt_Results <- dt_IBJFF_Weight_Classes[dt_Results, on = c("Weight_Class","Gender"
 
 dt_Absolute_Results <- dt_Results[Weight_Class == "ABSOLUTE"]
 dt_helper <- dt_Results[Weight_Class != "ABSOLUTE",.(Type,Gender,Weight_Class,Belt,Competitor_Name,Year,Tournament, Weight,UOM,Placing)]
+
+
+#Absolute table is the i table, helpr is x table
 dt_Absolute_Results <- dt_helper[dt_Absolute_Results,
-                                  on = c("Type","Gender","Weight_Class","Belt","Competitor_Name","Year","Tournament"),
+                                  on = c("Type","Gender","Belt","Competitor_Name","Year","Tournament"),
                                  #FIXME I really don't know how to use the data.table j argument. Lets learn this next time.
-                                 j = .(Year, Tournament, Type, Weight_Class, Age, Belt,Gender, Competitor_Name, Weight , UOM ,
-                                       Placing_Weight_Division = Placing, Placing_Absolute = i.Placing, Academy_Name)
+                                 # j = .(Year, Tournament, Type, Weight_Class, Age, Belt,Gender, Competitor_Name, Weight , UOM ,
+                                 #       Placing_Weight_Division = Placing, Placing_Absolute = i.Placing, Academy_Name)
+                     j =.(Year,Tournament,Type,Belt,Gender,Age,Competitor_Name,Academy_Name,Weight_Class,Weight,UOM,
+                          Placing_Absolute = i.Placing, Placing_Weight_Class = x.Placing)
 ]
 rm(dt_helper)
 
-dt_Absolute_Results %>% head(10)
 
-colnames(dt_Absolute_Results)
+dt_Absolute_Results[is.na(Weight_Class) & Year == '2016' & Gender == 'Male' & Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP"]
 
-
-dt_Absolute_Results %>% head(10)
-
-
-colnames(dt_Results)
-
-
+#FIXME seeing results where sometimes a competitior shows up in the absolute who didn't actually place in his divisions. Not sure what this exactly,
+#maybe some other way to enter the absolute? Check other year, so far have only looked at the tournament below.
+dt_Results %>% filter(Year == '2016', Gender == 'Male',Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP", Weight_Class == "ABSOLUTE")
+dt_Results %>% filter(Year == '2016', Gender == 'Male',Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP", Academy_Name == "Brasa CTA")
+dt_Results %>% filter(Competitor_Name == 'Augusto Lopes Mendes')
 
 
 
