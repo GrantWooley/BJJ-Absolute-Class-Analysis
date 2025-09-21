@@ -108,6 +108,7 @@ dt_Results <- dt_Results[Type == "NO-GI", Tournament := case_when(
 
 dt_Results <- dt_IBJFF_Weight_Classes[dt_Results, on = c("Weight_Class","Gender", "Type","Age")]
 
+#Join together our data to get the weight of each Absolute compteitor.
 dt_Absolute_Results <- dt_Results[Weight_Class == "ABSOLUTE"]
 dt_helper <- dt_Results[Weight_Class != "ABSOLUTE",.(Type,Gender,Weight_Class,Belt,Competitor_Name,Year,Tournament, Weight,UOM,Placing)]
 
@@ -120,17 +121,39 @@ dt_Absolute_Results <- dt_helper[dt_Absolute_Results,
 ]
 rm(dt_helper)
 
+#After doing our inital join to get the Weight of our Absolute compteitors, we sitll have a couple hundred records where we do not know the wieght
+#of the absolute competitor. After data exploration I'm seeing two primary reasons. 1. I see some records where a competitor only entered the absolute, and they have no
+#record for a regular weight divison. Possilby an IBJJF ruling or exception i'm unfamiliar with. Dealing with these missing weights in a multitude of ways.
+#2. Sometimes the competitors name was not spelled the same between their weight class entrance and their absolute class entrance.
 
-dt_Absolute_Results[is.na(Weight_Class) & Year == '2016' & Gender == 'Male' & Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP"]
+#For the cases where a competitor does not show up in a regular weight division for the tournament, they often show up in a different tournament under a
+#weight class. Find their most common weight across all records.
+dt_Common_Weight <- dt_Results[Weight_Class != "ABSOLUTE", .(N = .N), by = c("Type","Gender","Weight_Class","Weight","UOM", "Belt", "Competitor_Name")]
+dt_Common_Weight <- dt_Common_Weight %>% group_by(Type,Gender, Belt, Competitor_Name) %>% filter(N == max(N)) %>% ungroup()
+#Sometimes we have a tie for the most common weight class. I.e. A competitor will have competed an equal number of times across different weight classes.
+#My hypothesis is that being heavier increases your odds of oding well in the Absolute, I want to bias the analysis against my hypothesis. So for these instacnes,
+#I will keep the record with the lower weight.
+dt_Common_Weight <- dt_Common_Weight %>% group_by(Type,Gender, Belt, Competitor_Name) %>% filter(Weight == min(Weight)) %>% ungroup() %>% setDT()
+#Join on our common weight to our NA records.
+dt_Absolute_Results <- dt_Common_Weight[dt_Absolute_Results, on = c("Type","Gender","Belt","Competitor_Name"),
+                                        j = .(Year,Tournament,Type,Belt,Gender,Age,Competitor_Name,Academy_Name,Weight_Class = i.Weight_Class,Weight = i.Weight,
+                                              UOM = i.UOM,  Placing_Absolute, Placing_Weight_Class, CW_Weight_Class = x.Weight_Class, CW_Weight = x.Weight, CW_UOM = x.UOM)
+                                        ]
+dt_Absolute_Results <- dt_Absolute_Results[is.na(Weight_Class), `:=`(
+  Weight_Class =  CW_Weight_Class,
+  Weight = CW_Weight,
+  UOM = CW_UOM
+)]
+dt_Absolute_Results <- dt_Absolute_Results[, `:=` (  CW_Weight_Class = NULL, CW_Weight = NULL, CW_UOM = NULL)]
 
-#FIXME seeing results where sometimes a competitior shows up in the absolute who didn't actually place in his divisions. Not sure what this exactly,
-#maybe some other way to enter the absolute? Check other year, so far have only looked at the tournament below.
-dt_Results %>% filter(Year == '2016', Gender == 'Male',Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP", Weight_Class == "ABSOLUTE")
-dt_Results %>% filter(Year == '2016', Gender == 'Male',Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP", Academy_Name == "Brasa CTA")
-dt_Results %>% filter(Competitor_Name == 'Augusto Lopes Mendes')
+#FIXME Left off here.
+#For the cases where a competitors name is spelled differently between their weight class entrance and their absolue entrance, I will split our competitior name into a First Name,
+#Last Name, and remaining Name columns (some competitors have many names). Then join in our results using Name, Year, Academy, etc... for each of the 3 naming categories. This should catch a large number
+#of these spelling errors. Note: I explored using a fuzzy match solution, but this did not work well.
+#dt_Results %>% mutate(
+#  Fname = str_split(Competitor_Name, " ")
+#)
 
-
-
-
-
+nrow(dt_Absolute_Results[is.na(Weight_Class)])
+dt_Absolute_Results[is.na(Weight_Class)]
 
