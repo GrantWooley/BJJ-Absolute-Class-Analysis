@@ -1,5 +1,5 @@
-#Functions file containg helper function to Open web pages,
-#and two seperate web scraping functions for scraping both the old and new HTML 
+#Functions file contains helper function to Open web pages,
+#and two separate web scraping functions for scraping both the old and new HTML
 #format of the IBJJF results web pages.
 
 from urllib.request import urlopen
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
-#Function to open URL and get beautiful soup object. Defining this function seperately to allow
+#Function to open URL and get beautiful soup object. Defining this function separately to allow
 #error handling of the URLs on the IBJFF Results page that are dead links.
 def GetSoup(URL):
     Soup = urlopen(URL)
@@ -16,7 +16,7 @@ def GetSoup(URL):
 
 
 
-#Function for Scraping older HTML format of IBJFF pages. From rouglhy the year 2012 and before.
+#Function for Scraping older HTML format of IBJFF pages. From roughly the year 2012 and before.
 #Accepts Beautiful Soup object as Argument.
 def LegacyScrape(Soup):
 
@@ -26,10 +26,10 @@ def LegacyScrape(Soup):
     #Splitting Out Tags that contain categories.
     Categories = AthleteResults.find_all("div", class_ ="category mt-4 mb-3")
 
-    #Scrape through Categories tags. Pulling out Divsion string and splitting the strings properly
+    #Scrape through Categories tags. Pulling out Division string and splitting the strings properly
     #into age, belt, gender, weight.
     #Declare a list to store Categories into. I.E. One instance of Age, Belt, Gender, Weight 
-    #is one cateogry.
+    #is one category.
     Headers = []
     for x in Categories:
         #One web page was missing a string attribute for a div tag. 
@@ -45,8 +45,8 @@ def LegacyScrape(Soup):
 
 
     #Split out Tags that contain Tbodies aka tables. These have two td children tags. Td tag one contains Athlete placing.
-    #Td tag two contains two cildren elements. 
-    # Child1: Athelete Name, Child2: Academy Name
+    #Td tag two contains two children elements.
+    # Child1: Athlete Name, Child2: Academy Name
     ResultTables = AthleteResults.find_all("tbody")
 
     #Declare List to Store Placing information. Placing, Athlete Name, and Academy Name.
@@ -74,7 +74,7 @@ def LegacyScrape(Soup):
                 DivTags = tag.find_all("div")
                 #Loop through each div tag and and add tag.string to results lists.
                 for div in DivTags:
-                    #Some Atheletes do not have an affiliated academy, in those instances you get a return of none,
+                    #Some Athletes do not have an affiliated academy, in those instances you get a return of none,
                     #converting to string data type to prevent error.
                     Sublist.append(str(div.string))
         #Append Sublist Variable to Results list and then clear the sublist.
@@ -110,8 +110,8 @@ def LegacyScrape(Soup):
 
     #Filtering df to only Adult divisions that contain Black Belt, 
     #as analys will only be for top level competition.
-    #Female Divsions in early tournmaent years were combined belts. I.E. Brown Black, Purple Brown Black categories.
-    #Brazilian Nationals Results are stored in Portugese so, need to filter for bothn English and Portugese words.
+    #Female Divisions in early tournament years were combined belts. I.E. Brown Black, Purple Brown Black categories.
+    #Brazilian Nationals Results are stored in Portuguese so, need to filter for both English and Portuguese words.
     df = df[(df['Belt'].str.contains('Black', na = False)) | (df['Belt'].str.contains('Preta', na = False))]
     #On one web page, Adult is misspelled as Asult. Filtering for this page and doing data cleansing to correct these records.
     df = df[(df['Age'] == 'Adult') | (df['Age'] == 'Adulto') | (df['Age'] == 'Asult')]
@@ -141,23 +141,23 @@ def LegacyScrape(Soup):
 #Accepts Beautiful Soup object as Argument.
 def ModernScrape(Soup):
 
-    #Splitout Athelete Results
+    #Splitout Athlete Results
     AthleteResults = Soup.find("div", class_ = "col-xs-12 col-md-6 col-athlete")
 
     #Splitting Out Tags that contain categories.
     Categories =  AthleteResults.find_all("h4", class_ = "subtitle")
 
-    #Scrape through Categories tags. Pulling out Divsion string and splitting the strings properly
+    #Scrape through Categories tags. Pulling out Division string and splitting the strings properly
     #into age, belt, gender, weight
     #Declare a list to store Categories into. I.E. One instance of Age, Belt, Gender, Weight 
-    # Is one cateogry.
+    # Is one category.
     Headers = []
 
     #Loop through each category
-    for Cateogry in Categories:
-        #Pull the caegories Contents, which contains Age, Gender, Belt, and Weights
-        Contents = Cateogry.contents
-        #Contents contain cateogry info in multiple formats. Pulling the best format.
+    for Category in Categories:
+        #Pull the categories Contents, which contains Age, Gender, Belt, and Weights
+        Contents = Category.contents
+        #Contents contain category info in multiple formats. Pulling the best format.
         Contents = Contents[1]
         #Strings need to be split, and then stripped of line returns one at a time before being placed
         #into the headers list.
@@ -167,14 +167,14 @@ def ModernScrape(Soup):
         #Stripping each string of whitespace and adding to sublist.
         for x in Contents:
             Sublist.append(x.strip())
-        #Appending cleaned Cateogry to Headers list
+        #Appending cleaned category to Headers list
         Headers.append(Sublist)
         
 
 
     #Splitting Out div Tags that contain lists. These list tags contain the table like objects that include Placing, Athlete Name, Athlete Academy. 
     #They have children div tags with class athlete-item. One for each competitor result.
-    #Athelte item div tags contian two children div tags:
+    #Athelte item div tags contain two children div tags:
     #1.Class = position-athlete contains placing. 
     #2.Class = name contains two elements: Athlete Name, Academy name. Which are stored under P and Span children tags.
 
@@ -244,8 +244,8 @@ def ModernScrape(Soup):
 
     #Filtering df to only Adult divisions that contain Black Belt, 
     #as analys will only be for top level competition.
-    #Female Divsions in early tournmaent years were combined belts. I.E. Brown Black, Purple Brown Black categories.
-    #Brazilian Nationals Results are stored in Portugese so, need to filter for bothn English and Portugese words.
+    #Female Divisions in early tournament years were combined belts. I.E. Brown Black, Purple Brown Black categories.
+    #Brazilian Nationals Results are stored in Portuguese so, need to filter for both English and Portuguese words.
     df = df[(df['Belt'].str.contains('Black', na = False)) | (df['Belt'].str.contains('Preta', na = False))]
     #On one web page, Adult is misspelled as Asult. Filtering for this page and doing data cleansing to correct these records.
     df = df[(df['Age'] == 'Adult') | (df['Age'] == 'Adulto') | (df['Age'] == 'Asult')]
