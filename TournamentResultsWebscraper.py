@@ -9,12 +9,12 @@ import Scraper_Functions as sc
 
 
 #Open Connection to the primary IBJJF Event Results Webpage
-DirectoryURL = "https://ibjjf.com/events/results"
+URL_Results = "https://ibjjf.com/events/results"
 
 #Get the Soup
-Soup = sc.GetSoup(DirectoryURL)
+Soup = sc.GetSoup(URL_Results)
 
-#Getting all tags that have an asscocitaed results URLs
+#Getting all tags that have an associated results URLs
 tags = Soup.find_all('a',class_ = 'event-year-result')
 
 
@@ -29,21 +29,20 @@ Tournaments =["World Jiu-Jitsu IBJJF Championship",
      "Brazilian National Jiu-Jitsu No-Gi Championship"]
 
 
-#Storing links to results pages from any tag that has a data-n elemnet matching a major tournament.
-#ResultsURLs = [tag['href'] for tag in tags  if any(Tournament in tag['data-n'] for Tournament in Tournaments)]
+#Storing links to results pages from any tag that has a data-n element matching a major tournament.
 ResultsURLs = [tag['href'] for tag in tags  if any(Tournament == tag['data-n'] for Tournament in Tournaments)]
 
 #IBJJF has two web page layouts. Around the year 2012 the HTML format/layout changed.
 #In the URLs for the results pages this is reflected. The older format web pages' URLs always end 
 #in the following format /year-tournammentname-ibjjf-championship. The newer web pages' URLs always
-#end wiht /PublicResults
+#end with /PublicResults
 
 #Loop through URL in ResultsURL list. 
-#If the URL ends with PublicResults use the web scraping file set up for the new HTML format/layout
-#Else use the web scraping file set up for the old HTML format/layout
+#If the URL ends with PublicResults use the web scraping function set up for the new HTML format/layout
+#Else use the web scraping function set up for the old HTML format/layout
 
 #Loop opening connections to every IBJJF Results Page for major tournaments, scraping the webpage, returning a dataframe, and saving as CSV.
-file_path = r"C:\Users\grant\OneDrive\Road To DE\Data Projects\BJJ Absolute Class Analysis\IBJJF Result Files"
+Path_Data = r"C:\Users\grant\OneDrive\Road To DE\Data Projects\BJJ Absolute Class Analysis\data\raw_data"
 
 i = 0
 for URL in ResultsURLs:
@@ -60,7 +59,8 @@ for URL in ResultsURLs:
         df = sc.ModernScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
-        df.to_excel(fr"{file_path}\{File}.xlsx", sheet_name= "Results", index= False)
+        #df.to_excel(fr"{Path_Data}\{File}.xlsx", sheet_name= "Results", index= False)
+        df.to_csv(fr"{Path_Data}\{File}.csv", index= False)
         print(File + " saved.")    
     else:
         #Run webscraper set up for old format.
@@ -74,7 +74,8 @@ for URL in ResultsURLs:
         df = sc.LegacyScrape(Soup)
         #Access first row, and columns Tournament, Year of df to set the file name. 
         File = df.loc[0,"Tournament"] +" " + df.loc[0,"Year"]
-        df.to_excel(fr"{file_path}\{File}.xlsx", sheet_name= "Results", index= False)
+        #df.to_excel(fr"{Path_Data}\{File}.xlsx", sheet_name= "Results", index= False)
+        df.to_csv(fr"{Path_Data}\{File}.csv", index= False)
         print(File + " saved.")
         
 print("All Web Pages Successfully Scraped!")
