@@ -1,13 +1,16 @@
+#Script used to clean the scraped data.
 rm(list = ls())
 
-#FIXME Dont use all of tidyverse only the packages I need.
-library(tidyverse)
 library(data.table)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(purrr)
 
+#FIXME update with Here package eventually.
+source("C:/Users/grant/OneDrive/Road To DE/Data Projects/BJJ Absolute Class Analysis/R/Vars.R")
 
-Path_Main <- file.path(getwd())
-Path_Data <- file.path(Path_Main,"data","raw_data")
-
+#FIXME need to double check the weight class table and make sure it makes sense and everything is entered correctly.
 dt_IBJFF_Weight_Classes <- data.table(
   Type = c("GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI",
            "NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI"),
@@ -23,7 +26,7 @@ dt_IBJFF_Weight_Classes <- data.table(
 dt_IBJFF_Weight_Classes <- dt_IBJFF_Weight_Classes[, UOM := "lbs"]
 
 
-Files_Raw_Data <- list.files(Path_Data)
+Files_Raw_Data <- list.files(Path_Data_Raw)
 #Funciton read raw data files.
 File_Read_Results <- function (fileName,filePath){
   File <- file.path(filePath,fileName)
@@ -40,7 +43,7 @@ File_Read_Results <- function (fileName,filePath){
     Tournament = "character"
   ))
 }
-dt_Results <- map(Files_Raw_Data,File_Read_Results,Path_Data)
+dt_Results <- map(Files_Raw_Data,File_Read_Results,Path_Data_Raw)
 dt_Results <- bind_rows(dt_Results) %>% setDT()
 
 dt_Results <- dt_Results %>%
@@ -145,15 +148,62 @@ dt_Absolute_Results <- dt_Absolute_Results[is.na(Weight_Class), `:=`(
   UOM = CW_UOM
 )]
 dt_Absolute_Results <- dt_Absolute_Results[, `:=` (  CW_Weight_Class = NULL, CW_Weight = NULL, CW_UOM = NULL)]
+rm(dt_Common_Weight)
 
-#FIXME Left off here.
 #For the cases where a competitors name is spelled differently between their weight class entrance and their absolue entrance, I will split our competitior name into a First Name,
 #Last Name, and remaining Name columns (some competitors have many names). Then join in our results using Name, Year, Academy, etc... for each of the 3 naming categories. This should catch a large number
 #of these spelling errors. Note: I explored using a fuzzy match solution, but this did not work well.
 #dt_Results %>% mutate(
 #  Fname = str_split(Competitor_Name, " ")
 #)
+Split_Names <- function (dt,colName){
+  dt <- dt %>% mutate(Name_Split = str_split({{colName}}," "))
+  dt <- dt %>% unnest_wider(Name_Split, names_sep = "_",transform = str_to_lower)
+  dt <- dt %>% rename_with(~gsub("Name_Split","Name",.x))
+}
 
-nrow(dt_Absolute_Results[is.na(Weight_Class)])
-dt_Absolute_Results[is.na(Weight_Class)]
+dt_Results_Names <- dt_Results[Weight_Class != "ABSOLUTE"]
+dt_Results_Names <- dt_Results_Names %>% rename(RN_Weight_Class = Weight_Class, RN_Weight = Weight, RN_UOM = UOM)
+dt_Results_Names <- dt_Results_Names %>% Split_Names(Competitor_Name) %>% mutate(Competitor_Name = NULL) %>%  setDT()
+dt_Absolute_Results <- dt_Absolute_Results %>% Split_Names(Competitor_Name) %>% setDT()
 
+Join_Results_Name_Table <- function (dtAbsoluteTable,dtResultsNameTable,nameColumn){
+  dt_helper <- dtResultsNameTable[, c("Year", "Tournament", "Type", "Belt", "Gender", "Age", "Academy_Name",
+                                      "RN_Weight_Class", "RN_Weight", "RN_UOM", "Placing", nameColumn), with = FALSE]
+  #Filter out records that are NA, to prevent incorrect joins as we get to nameColumns that are largely empty.
+  dt_helper <-  dt_helper[!is.na(get(nameColumn))]
+  dtAbsoluteTable <- dt_helper[dtAbsoluteTable, on = c("Year","Tournament","Type","Belt","Gender","Age","Academy_Name",nameColumn)
+  ]
+  dtAbsoluteTable[is.na(Weight_Class), `:=`(
+    Placing_Weight_Class = Placing,
+    Weight_Class =RN_Weight_Class,
+    Weight = RN_Weight,
+    UOM = RN_UOM
+  )]
+  dtAbsoluteTable[, `:=`(
+    Placing = NULL,
+    RN_Weight_Class = NULL,
+    RN_Weight = NULL,
+    RN_UOM = NULL
+  )]
+}
+#Joining on more than the first 3 names is no longer significantly reducing the amount of null records we have for our weight class
+#and is causing duplication. Not worth doing more than 3 columns.
+dt_Absolute_Results <- dt_Absolute_Results %>% Join_Results_Name_Table(dt_Results_Names, "Name_1")
+dt_Absolute_Results <- dt_Absolute_Results %>% Join_Results_Name_Table(dt_Results_Names, "Name_2")
+dt_Absolute_Results <- dt_Absolute_Results %>% Join_Results_Name_Table(dt_Results_Names, "Name_3")
+
+dt_Absolute_Results <- dt_Absolute_Results[,.(Year,Tournament,Type,Belt,Gender,Age,Competitor_Name,Academy_Name,Weight_Class,
+                                              Weight,UOM, Placing_Absolute,Placing_Weight_Class
+)]
+
+#Drop out the duplicates that was caused by joining on Names.
+dt_Absolute_Results <- distinct(dt_Absolute_Results)
+
+#Final Clean Up before saving data.
+dt_Results <- dt_Results[Weight_Class != "ABOSLUTE"]
+setorder(dt_Results,Type,Tournament,Year, Placing)
+setorder(dt_Absolute_Results,Type,Tournament,Year, Placing_Absolute)
+
+saveRDS(dt_Results,file.path(Path_Data,File_Results))
+saveRDS(dt_Absolute_Results,file.path(Path_Data,File_Absolute_Results))
