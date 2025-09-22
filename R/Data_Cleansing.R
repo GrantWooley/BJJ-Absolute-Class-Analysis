@@ -6,22 +6,26 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(purrr)
+library(here)
 
-#FIXME update with Here package eventually.
-source("C:/Users/grant/OneDrive/Road To DE/Data Projects/BJJ Absolute Class Analysis/R/Vars.R")
+source(here("R","Vars.R"))
 
-#FIXME need to double check the weight class table and make sure it makes sense and everything is entered correctly.
 dt_IBJFF_Weight_Classes <- data.table(
   Type = c("GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI",
            "NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI"),
   Age = c("Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult",
           "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult"),
-  Gender = c("Male","Male","Male","Male","Male","Male","Male","Male","Male", "Female","Female","Female","Female","Female","Female","Female","Female",
+  Gender = c("Male","Male","Male","Male","Male","Male","Male","Male","Male",
+             "Female","Female","Female","Female","Female","Female","Female","Female",
              "Male","Male","Male","Male","Male","Male","Male","Male","Male", "Female","Female","Female","Female","Female","Female","Female","Female"),
-  Weight_Class = c("ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY", "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY",
-                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY", "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY"),
-  Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, NA, 107.0,118.0,129.0,141.6,152.6,163.6,175.0, NA,
-             122.6,136.0,149.0,162.6,175.6,188.6,202,215,NA,103.0,114.0,125.0,136.0,147.0,158.0,169.0,NA)
+  Weight_Class = c("ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
+                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY",
+                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
+                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY"),
+  Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, NA,
+             107.0,118.0,129.0,141.6,152.6,163.6,175.0, NA,
+             122.6,136.0,149.0,162.6,175.6,188.6,202,215,NA,
+             103.0,114.0,125.0,136.0,147.0,158.0,169.0,NA)
 )
 dt_IBJFF_Weight_Classes <- dt_IBJFF_Weight_Classes[, UOM := "lbs"]
 
@@ -202,6 +206,10 @@ dt_Absolute_Results <- distinct(dt_Absolute_Results)
 
 #Final Clean Up before saving data.
 dt_Results <- dt_Results[Weight_Class != "ABOSLUTE"]
+Factor_Order <- c(NA,"ROOSTER","LIGHT FEATHER","FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY","SUPER HEAVY","ULTRA HEAVY")
+dt_Results <- dt_Results[, Weight_Class := factor(Weight_Class, levels = Factor_Order)]
+dt_Absolute_Results <- dt_Absolute_Results[, Weight_Class := factor(Weight_Class, levels = Factor_Order)]
+
 setorder(dt_Results,Type,Tournament,Year, Placing)
 setorder(dt_Absolute_Results,Type,Tournament,Year, Placing_Absolute)
 
