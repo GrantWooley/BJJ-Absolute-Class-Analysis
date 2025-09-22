@@ -1,0 +1,77 @@
+Age,Gender,Belt,Weight Class,Placing,Competitor Name,Academy Name,Year,Tournament
+Adult,Male,Black,Rooster,1,Rodrigo Otavio Ferreira de Oliveira,Vision,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Rooster,2,Yuri da Silva Campos,Brothers Club,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Rooster,3,Aniel  Bonifacio Candido,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Rooster,3,Oziel Santos de Carvalho,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light-Feather,1,Diego Oliveira Batista,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light-Feather,2,Anderson Delfino Duarte Júnior,Soldiers Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light-Feather,3,Jonathan da Silva Santos,Nova União,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light-Feather,3,Nathannael Jackson Fonseca  Fernandes,Melqui Galvão BJJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Feather,1,Cole Anthony Abate,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Feather,2,Isaac Nolan Doederlein,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Feather,3,Cleber de Sousa Fernandes,JFC Almeida JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Feather,3,Giuliano Francesco Spera,Cicero Costha Internacional,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light,1,Lucas Maquiné Silva,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light,2,Luiz Paulo Carneiro Medeiros,Kvra Top Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light,3,Leandro Lima de Souza,Lotus Club,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Light,3,Lucas Andre Galvão Protasio,CheckMat,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Middle,1,Tainan Dalpra Costa,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Middle,2,Elijah Amir Dorsey,Team Lloyd Irvin,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Middle,3,Jefferson Alves Goteu,CheckMat,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Middle,3,Yuri Gabriel Rodrigues,Nova União,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Medium-Heavy,1,Jansen Gomes Ramos,CheckMat,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Medium-Heavy,2,Davi Vetoraci de Menezes,Focus Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Medium-Heavy,3,Matheus Vetoraci de Menezes,Focus Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Medium-Heavy,3,Uanderson Ferreira de Oliveira,Carlson Gracie Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Heavy,1,Adam Piotr Wardzinski,CheckMat,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Heavy,2,Leonardo Silveira Ferreira,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Heavy,3,Pedro Henrique Pinheiro Machado de Souza,Atos Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Heavy,3,Vinicius Liberati,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Super-Heavy,1,Erich Munis dos Santos,Soldiers Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Super-Heavy,2,Nolan Patrick Braga Stuart,Brea Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Super-Heavy,3,Elioenai Julio de S. Braz,Team Crézio Lutas,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Super-Heavy,3,Lucas Jose Alves de Oliveira,Carlson Gracie Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Ultra-Heavy,1,Marcus Vinicius Ribeiro de Siqueira,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Ultra-Heavy,2,Guilherme Soares Santos,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Ultra-Heavy,3,Felipe Augusto Farias Bezerra,ROXBJJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Ultra-Heavy,3,Kjetil Hope Lydvo,CheckMat,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Enum_WeightDivision_Absoluto_Label,1,Erich Munis dos Santos,Soldiers Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Enum_WeightDivision_Absoluto_Label,2,Marcus Vinicius Ribeiro de Siqueira,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Enum_WeightDivision_Absoluto_Label,3,Felipe Augusto Farias Bezerra,ROXBJJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Male,Black,Enum_WeightDivision_Absoluto_Label,3,Pedro Henrique Pinheiro Machado de Souza,Atos Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Rooster,1,Mayssa Caldas Pereira Bastos,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Rooster,2,Thaís Loureiro Felipe,Atos Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Rooster,3,Gabrielle Kari Etzel,Upper Twelve Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Rooster,3,Mariana Cabral Rolszt,Gracie Humaita South Bay,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light-Feather,1,Brenda Larissa Alves da Silva,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light-Feather,2,Jessica Caroline Coelho Dantas,Pax Jiu-Jitsu Academy,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light-Feather,3,Andressa Nogueira Tolentino Guirau,Barreto,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light-Feather,3,Polyanna Souza de Araujo,GF Team International,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Feather,1,Cassia Moura Remesar,LEAD BJJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Feather,2,Margot Ciccarelli,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Feather,3,Caroline Brunacio Vinhaes,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Feather,3,Maria Luiza Nunes Pinto,JFC Almeida JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light,1,Janaina Maia de Menezes,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light,2,Brianna Ste-Marie,Mizu Studio,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light,3,Maria Cláudia Almeida Silva,Infight JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Light,3,Natália Zumba de Souza,JFC Almeida JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Middle,1,Elisabeth Ann Clay,Ares BJJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Middle,2,Rebeca Ferreira de Lima,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Middle,3,Alexia Souza Arantes,Vision,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Middle,3,Gisele Constante Menezes Tavares,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Medium-Heavy,1,Maria Carolina Barón Vicentini,AOJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Medium-Heavy,2,Aurélie Le Vern,Six Blades Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Medium-Heavy,3,Giovanna Xavier Carneiro,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Medium-Heavy,3,Sábatha Laís Francisco dos Santos,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Heavy,1,Yara Soares do Nascimento,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Heavy,2,Tamiris Fernanda da Silva,DreamArt,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Heavy,3,Giovanna Jara de Souza,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Heavy,3,Melissa Stricker Cueto,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Super-Heavy,1,Tayane Porfírio de Araújo,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Super-Heavy,2,Gabrieli Pessanha de Souza Marinho,Infight JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Super-Heavy,3,Isabely Generoso da Silva Lemos,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Super-Heavy,3,Kauany Lorena Ramos Queiroz,GF Team International,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Enum_WeightDivision_Absoluto_Label,1,Gabrieli Pessanha de Souza Marinho,Infight JJ,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Enum_WeightDivision_Absoluto_Label,2,Yara Soares do Nascimento,Fratres Brazilian Jiu-Jitsu,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Enum_WeightDivision_Absoluto_Label,3,Isabely Generoso da Silva Lemos,GF Team,2025,Campeonato Brasileiro de Jiu-Jitsu 
+Adult,Female,Black,Enum_WeightDivision_Absoluto_Label,3,Melissa Stricker Cueto,Alliance,2025,Campeonato Brasileiro de Jiu-Jitsu 
