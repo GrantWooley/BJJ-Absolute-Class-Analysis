@@ -1,2 +1,3 @@
-/.quarto/
+.idea
 .Rproj.user
+__pycache__
