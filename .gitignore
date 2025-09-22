@@ -8,3 +8,4 @@ data
 #Ignoring Data Spell IDE files
 .idea
 .Rproj.user
+.Rhistory
