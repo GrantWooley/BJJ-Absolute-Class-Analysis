@@ -97,7 +97,7 @@ dt_Absolute_Gender %>%
   )+
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 30, face = "bold",hjust = 0.5),
+    plot.title = element_text(size = 25, face = "bold",hjust = 0.5),
     plot.subtitle = element_text(size = 12),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),

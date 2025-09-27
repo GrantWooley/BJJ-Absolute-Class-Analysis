@@ -1,0 +1,7 @@
+# Testing out Multi Page Setup
+
+Need to figure out how to link the pages properly.
+
+```{r}
+print("This is my 2nd page.")
+```

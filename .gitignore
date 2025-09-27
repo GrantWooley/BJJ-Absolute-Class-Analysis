@@ -1,4 +1,5 @@
 .idea
 .Rproj.user
+.Rhistory
 __pycache__
 /.quarto/

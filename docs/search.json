@@ -5,5 +5,12 @@
     "title": "BJJ Absolute Class Analysis",
     "section": "",
     "text": "This project aims to determine using data what weight a competitor needs to be to have realistic chance of winning the Absolute class at the highest levels.\nThe project looks at Tournament data from the entire history of the IBJJF. Only considering the Black Belt level for both GI and No-GI at the following major tournaments.\nIBJJF Worlds\nIBJJF Pans\nIBJJF Europeans\nBrazilian Nationals\n\nFirst Look\nOn our first look of the data a few insights stand out.\n\nThere is clear up tick in placings starting at Medium Heavy and a consistent drop off at Ultra Heavy. This leads me to believe that you need to be big enough to place in the absolute, but weight has diminishing returns. We likely see the drop off at Ultra Heavy due to many of these athletes being Ultra Heady due to excess body weight and not necessarily pure size and stature. Perhaps causing them to be not as athletic in comparison to the slightly smaller competitors in the Super Heavy etc… weight classes, that contain a weight class.\n\n\n\n\n\n\n\n\n\n\n\nThere seems to be no meaningful difference between the GI and NO-GI categories and our overall trend holds.\n\n\n\n\n\n\n\n\n\n\n\nInterestingly we do see a difference between Male and Female categories. With the Female category having a noticeably flatter distribution. This could imply that weight is less important to placing in the absolute for women. However our dataset is small enough that this may be caused by a small sample size. If we took data across all belt levels, or a larger set of tournaments we could be more confident in this trend."
+  },
+  {
+    "objectID": "pageOne.html",
+    "href": "pageOne.html",
+    "title": "Testing out Multi Page Setup",
+    "section": "",
+    "text": "Testing out Multi Page Setup\nNeed to figure out how to link the pages properly.\n\nprint(\"This is my 2nd page.\")\n\n[1] \"This is my 2nd page.\""
   }
 ]

@@ -8,3 +8,5 @@ website:
     left:
       - href: about.qmd
         text: Home
+      - href: pageOne.qmd
+        text: Page One

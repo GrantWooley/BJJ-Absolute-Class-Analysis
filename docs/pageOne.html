@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BJJ Absolute Class Analysis</title>
+<title>pageone – BJJ Absolute Class Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -89,11 +124,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pageOne.html"> 
+    <a class="nav-link active" href="./pageOne.html" aria-current="page"> 
 <span class="menu-text">Page One</span></a>
   </li>  
 </ul>
@@ -109,70 +144,18 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">BJJ Absolute Class Analysis</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This project aims to determine using data what weight a competitor needs to be to have realistic chance of winning the Absolute class at the highest levels.<br>
-The project looks at Tournament data from the entire history of the IBJJF. Only considering the Black Belt level for both GI and No-GI at the following major tournaments.</p>
-<p>IBJJF Worlds<br>
-IBJJF Pans<br>
-IBJJF Europeans<br>
-Brazilian Nationals</p>
-<section id="first-look" class="level1">
-<h1>First Look</h1>
-<p>On our first look of the data a few insights stand out.</p>
-<ol type="1">
-<li>There is clear up tick in placings starting at Medium Heavy and a consistent drop off at Ultra Heavy. This leads me to believe that you need to be big enough to place in the absolute, but weight has diminishing returns. We likely see the drop off at Ultra Heavy due to many of these athletes being Ultra Heady due to excess body weight and not necessarily pure size and stature. Perhaps causing them to be not as athletic in comparison to the slightly smaller competitors in the Super Heavy etc… weight classes, that contain a weight class.</li>
-</ol>
+<section id="testing-out-multi-page-setup" class="level1">
+<h1>Testing out Multi Page Setup</h1>
+<p>Need to figure out how to link the pages properly.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="about_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ol start="2" type="1">
-<li>There seems to be no meaningful difference between the GI and NO-GI categories and our overall trend holds.</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="about_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ol start="3" type="1">
-<li>Interestingly we do see a difference between Male and Female categories. With the Female category having a noticeably flatter distribution. This could imply that weight is less important to placing in the absolute for women. However our dataset is small enough that this may be caused by a small sample size. If we took data across all belt levels, or a larger set of tournaments we could be more confident in this trend.</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="about_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"This is my 2nd page."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "This is my 2nd page."</code></pre>
 </div>
 </div>
 
