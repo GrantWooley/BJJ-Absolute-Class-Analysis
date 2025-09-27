@@ -14,8 +14,12 @@ Brazilian Nationals
 #| message: false
 #| warning: false
 #| include: false
-library(tidyverse)
+library(here)
 library(data.table)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(forcats)
 
 ```
 
