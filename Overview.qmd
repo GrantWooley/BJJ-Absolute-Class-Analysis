@@ -1,3 +1,8 @@
+```{r}
+#| echo: false
+source("R/Vars.R")
+```
+
 ---
 title: "BJJ Absolute Class Analysis"
 ---
@@ -10,131 +15,30 @@ IBJJF Pans\
 IBJJF Europeans\
 Brazilian Nationals
 
-```{r}
-#| message: false
-#| warning: false
-#| include: false
-library(here)
-library(data.table)
-library(dplyr)
-library(ggplot2)
-library(scales)
-library(forcats)
-
-```
-
-```{r}
-#| include: false
-Path_Data <- file.path("C:/Users/grant/OneDrive/Road To DE/Data Projects/BJJ Absolute Class Analysis/data")
-File_Absolute_Results <- "IBJJF_Results_Absolute.rds"
-File_Results <- "IBJJF_Results_Weight_Class.rds"
-dt_Results <- readRDS(file.path(Path_Data,File_Results))
-dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
-
-
-```
-
 # First Look
 
 On our first look of the data a few insights stand out.
 
 1.  There is clear up tick in placings starting at Medium Heavy and a consistent drop off at Ultra Heavy. This leads me to believe that you need to be big enough to place in the absolute, but weight has diminishing returns. We likely see the drop off at Ultra Heavy due to many of these athletes being Ultra Heady due to excess body weight and not necessarily pure size and stature. Perhaps causing them to be not as athletic in comparison to the slightly smaller competitors in the Super Heavy etc... weight classes, that contain a weight class.
 
+readRDS(file.path(Path_Data,"Overview.rds"))
+
 ```{r}
 #| echo: false
-#First look at what does the data say in general?
-dt_Absolute_High_Level <- dt_Absolute_Results[!is.na(Weight_Class),.(Type,Gender,Placing_Absolute,Weight_Class,Placing_Weight_Class)]
-#Do we see a general trend across the whole dataset? What weight class places in the absolute on average?
-dt_Absolute_Overview <- dt_Absolute_High_Level[,.N, by = c("Weight_Class")]
-dt_Absolute_Overview <- dt_Absolute_Overview[, Total := sum(N)]
-dt_Absolute_Overview <- dt_Absolute_Overview[, Proportion := round(N/Total,3)]
-
-dt_Absolute_Overview %>%
-  ggplot(aes(x =Weight_Class, y = N))+
-  geom_col( fill = "darkorange1", color = "black") +
-  geom_text(aes(label = N), vjust = -0.5) +
-  labs(
-    title = "Absolute Placings by Weight Class",
-    subtitle = paste0("# of Observations: ",sum(dt_Absolute_Overview$N)),
-    caption = "Placings include taking 2nd or 3rd in the absolute.",
-    x = "Weight Class",
-    y = "Count"
-  )+
-    theme_minimal() +
-  theme(
-    plot.title = element_text(size = 30, face = "bold"),
-    axis.title.x = element_text(size = 15,face = "bold"),
-    axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
-  )
+read_Plot("Overview.rds")
 ```
 
 2.  There seems to be no meaningful difference between the GI and NO-GI categories and our overall trend holds.
 
 ```{r}
 #| echo: false
-dt_Absolute_Type <- dt_Absolute_High_Level[,.N, by = c("Type","Weight_Class")]
-dt_Absolute_Type <- dt_Absolute_Type[, Total := sum(N), by = c("Type")]
-dt_Absolute_Type <- dt_Absolute_Type[, Proportion := round(N/Total,3)]
-
-Observations_GI <- dt_Absolute_Type %>% filter(Type == "GI") %>% summarize(N = sum(N)) %>% pull()
-Observations_NO_GI <- dt_Absolute_Type %>% filter(Type == "NO-GI") %>% summarize(N = sum(N)) %>% pull()
-
-dt_Absolute_Type %>%
-  ggplot(aes(x =Weight_Class, y = Proportion))+
-  geom_col(fill = "darkorange1", color = "black")+
-  facet_wrap(vars(Type))+
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
-  labs(
-    title = "GI vs NO-GI Proportion",
-    subtitle = paste0("Observations  GI: ",Observations_GI, "  NO-GI: ",Observations_NO_GI),
-    caption = "Placings include taking 2nd or 3rd in the absolute.",
-    x = "Weight Class",
-    y = "Proportion"
-  )+
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 30, face = "bold",hjust = 0.5),
-    plot.subtitle = element_text(size = 12),
-    axis.title.x = element_text(size = 15,face = "bold"),
-    axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
-    strip.text = element_text(size = 16, face = "bold")
-  )
+read_Plot("Type.rds")
 ```
 
 3.  Interestingly we do see a difference between Male and Female categories. With the Female category having a noticeably flatter distribution. This could imply that weight is less important to placing in the absolute for women. However our dataset is small enough that this may be caused by a small sample size. If we took data across all belt levels, or a larger set of tournaments we could be more confident in this trend.
 
 ```{r}
 #| echo: false
-#Do we see a difference between Male and Female perhaps we see more skew in one category or the other.
-dt_Absolute_Gender <- dt_Absolute_High_Level[,.N, by = c("Gender","Weight_Class")]
-dt_Absolute_Gender <- dt_Absolute_Gender[, Total := sum(N), by = c("Gender")]
-dt_Absolute_Gender <- dt_Absolute_Gender[, Proportion := round(N/Total,3)]
-
-Observations_Male <- dt_Absolute_Gender %>% filter(Gender == "Male") %>% summarize(N = sum(N)) %>% pull()
-Observations_Female <- dt_Absolute_Gender %>% filter(Gender == "Female") %>% summarize(N = sum(N)) %>% pull()
-
-dt_Absolute_Gender %>%
-  ggplot(aes(x =Weight_Class, y = Proportion))+
-  geom_col(fill = "darkorange1", color = "black")+
-  facet_wrap(vars(Gender))+
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
-  labs(
-    title = "GI vs NO-GI Proportion",
-    subtitle = paste0("Observations  Female: ",Observations_Female, "  Male: ",Observations_Male),
-    caption = "Placings include taking 2nd or 3rd in the absolute.",
-    x = "Weight Class",
-    y = "Proportion"
-  )+
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 30, face = "bold",hjust = 0.5),
-    plot.subtitle = element_text(size = 12),
-    axis.title.x = element_text(size = 15,face = "bold"),
-    axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
-    strip.text = element_text(size = 16, face = "bold")
-  )
+read_Plot("Gender.rds")
 
 ```

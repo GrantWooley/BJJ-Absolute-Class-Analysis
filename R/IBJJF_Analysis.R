@@ -7,8 +7,11 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 library(forcats)
+library(purrr)
 
 source(here("R","Vars.R"))
+
+List_Plots <- list()
 
 dt_Results <- readRDS(file.path(Path_Data,File_Results))
 dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
@@ -25,7 +28,7 @@ dt_Absolute_Overview <- dt_Absolute_High_Level[,.N, by = c("Weight_Class")]
 dt_Absolute_Overview <- dt_Absolute_Overview[, Total := sum(N)]
 dt_Absolute_Overview <- dt_Absolute_Overview[, Proportion := round(N/Total,3)]
 
-dt_Absolute_Overview %>%
+Plot_Overview <- dt_Absolute_Overview %>%
   ggplot(aes(x =Weight_Class, y = N))+
   geom_col( fill = "darkorange1", color = "black") +
   geom_text(aes(label = N), vjust = -0.5) +
@@ -44,6 +47,9 @@ dt_Absolute_Overview %>%
     axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
   )
 
+List_Plots <- append(List_Plots,list("Overview" = Plot_Overview))
+
+
 #Do we see a difference between Gi and No-GI perhaps we see more of a skew in one category or the other.
 dt_Absolute_Type <- dt_Absolute_High_Level[,.N, by = c("Type","Weight_Class")]
 dt_Absolute_Type <- dt_Absolute_Type[, Total := sum(N), by = c("Type")]
@@ -52,7 +58,7 @@ dt_Absolute_Type <- dt_Absolute_Type[, Proportion := round(N/Total,3)]
 Observations_GI <- dt_Absolute_Type %>% filter(Type == "GI") %>% summarize(N = sum(N)) %>% pull()
 Observations_NO_GI <- dt_Absolute_Type %>% filter(Type == "NO-GI") %>% summarize(N = sum(N)) %>% pull()
 
-dt_Absolute_Type %>%
+Plot_Type <- dt_Absolute_Type %>%
   ggplot(aes(x =Weight_Class, y = Proportion))+
   geom_col(fill = "darkorange1", color = "black")+
   facet_wrap(vars(Type))+
@@ -74,6 +80,7 @@ dt_Absolute_Type %>%
     strip.text = element_text(size = 16, face = "bold")
   )
 
+List_Plots <- append(List_Plots,list("Type" = Plot_Type))
 
 
 #Do we see a difference between Male and Female perhaps we see more skew in one category or the other.
@@ -84,7 +91,7 @@ dt_Absolute_Gender <- dt_Absolute_Gender[, Proportion := round(N/Total,3)]
 Observations_Male <- dt_Absolute_Gender %>% filter(Gender == "Male") %>% summarize(N = sum(N)) %>% pull()
 Observations_Female <- dt_Absolute_Gender %>% filter(Gender == "Female") %>% summarize(N = sum(N)) %>% pull()
 
-dt_Absolute_Gender %>%
+Plot_Gender <- dt_Absolute_Gender %>%
   ggplot(aes(x =Weight_Class, y = Proportion))+
   geom_col(fill = "darkorange1", color = "black")+
   facet_wrap(vars(Gender))+
@@ -105,6 +112,8 @@ dt_Absolute_Gender %>%
     axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
     strip.text = element_text(size = 16, face = "bold")
   )
+
+List_Plots <- append(List_Plots,list("Gender" = Plot_Gender))
 
 #Trends over time Analysis
 #As the sport has matured have we seen the average weight of competitors that place or win the absolute change over time?
@@ -129,7 +138,7 @@ dt_Placings_Absolute <- dt_Placings_Absolute[, Total := sum(N), by = c("Placing_
 dt_Placiings_Absolute <- dt_Placings_Absolute[, Proportion := round(N/Total,3) ]
 setorder(dt_Placings_Absolute, Placing_Absolute,Weight_Class)
 
-dt_Placings_Absolute %>%
+Plot_Placings_Absolute <- dt_Placings_Absolute %>%
   ggplot(aes(x = Placing_Absolute, y = Proportion, fill = fct_rev(Weight_Class)))+
   geom_bar(stat = "identity") +
   geom_text(
@@ -154,6 +163,8 @@ labs(
     axis.text.x = element_text( size = 10,face = "bold")
   )
 
+List_Plots <- append(List_Plots,list("Placings_Absolute" = Plot_Placings_Absolute))
+
 #Do people who place high in their weight class place high in the absolute or does it not matter?
 dt_Placings_Weight_Class <- dt_Placings
 #Because the IBJJF source data is not super clean. Have to filter out records where I was able to get a Weight class for a competitor based on another years results
@@ -165,7 +176,7 @@ dt_Placings_Weight_Class <- dt_Placings_Weight_Class[, Proportion := round(N/Tot
 setorder(dt_Placings_Weight_Class,Placing_Absolute,Placing_Weight_Class)
 dt_Placings_Weight_Class <- dt_Placings_Weight_Class[, Placing_Weight_Class := factor(Placing_Weight_Class, levels = c(3,2,1))]
 
-dt_Placings_Weight_Class %>%
+Plot_Placings_Weight_Class <- dt_Placings_Weight_Class %>%
   ggplot(aes(x = Placing_Absolute, y = Proportion, fill = Placing_Weight_Class))+
    geom_bar(stat = "identity") +
    geom_text(
@@ -189,14 +200,15 @@ dt_Placings_Weight_Class %>%
     axis.text.x = element_text( size = 10,face = "bold")
   )
 
+List_Plots <- append(List_Plots,list("Placings_Weight_Class" = Plot_Placings_Weight_Class))
+
 
 
 #Perhaps the lower weight classes often place in the absolute, but only the heavy weight classes take first. Break down of what percent of each absoute placing
 #is made up of different weight classes.
 
-
-
-
+List_Plot_Names <- paste0(Path_Plots,"/",names(List_Plots), ".rds")
+map2(List_Plots, List_Plot_Names,~saveRDS(object = .x, file = .y))
 
 
 
