@@ -1,0 +1,7 @@
+---
+title: "Conclusion"
+format: html
+editor: visual
+---
+
+The page where I give the so what. I.e. final conclusions/findings/wrapup.

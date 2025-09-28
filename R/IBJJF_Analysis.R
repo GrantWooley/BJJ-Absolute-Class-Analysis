@@ -20,7 +20,7 @@ dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
 #It is not realistic for a competitor to win the Absolute regardless of their weight and size. I believe that there is a natural cut off
 #point, where you simply become to small. I also generally believe that being larger and heavier increases you chances of winning or placing in the absolute.
 
-#High Level Analysis
+#High Level Analysis ####
 #First look at what does the data say in general?
 dt_Absolute_High_Level <- dt_Absolute_Results[!is.na(Weight_Class),.(Type,Gender,Placing_Absolute,Weight_Class,Placing_Weight_Class)]
 #Do we see a general trend across the whole dataset? What weight class places in the absolute on average?
@@ -115,7 +115,7 @@ Plot_Gender <- dt_Absolute_Gender %>%
 
 List_Plots <- append(List_Plots,list("Gender" = Plot_Gender))
 
-#Trends over time Analysis
+#Trends over time Analysis ####
 #As the sport has matured have we seen the average weight of competitors that place or win the absolute change over time?
 #Plot at a macro level.
 #Plot at Placing Level.
@@ -127,9 +127,77 @@ List_Plots <- append(List_Plots,list("Gender" = Plot_Gender))
 #Tournaments Analysis
 #Does the tournament play a role at all in who can place in the absolute, perhaps in Brazil where the sport is very mature its mostly heavier competitors.
 #Maybe in Europe where people tend be skinnier we see less heavy weights dominating the aboslute.
+dt_Tournaments <- dt_Absolute_Results[!is.na(Weight_Class), .(Year,Type,Tournament, Weight_Class, Placing_Absolute,Placing_Weight_Class)]
+dt_Tournaments <- dt_Tournaments[, Tournament := case_when(
+  Tournament == "WORLD IBJJF JIU JITSU CHAMPIONSHIP" ~ "Worlds",
+  Tournament == "WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP" ~ "Worlds",
+  Tournament == "PAN IBJJF JIU JITSU CHAMPIONSHIP" ~ "Pans",
+  Tournament == "PAN IBJJF JIU JITSU NO GI CHAMPIONSHIP" ~ "Pans",
+  Tournament == "BRAZILIAN NATIONAL IBJJF JIU JITSU CHAMPIONSHIP" ~ "Brazilian Nationals",
+  Tournament == "BRAZILIAN NATIONAL JIU JITSU NO GI CHAMPIONSHIP" ~ "Brazilian Nationals",
+  Tournament == "EUROPEAN IBJJF JIU JITSU CHAMPIONSHIP" ~ "Europeans",
+  Tournament == "EUROPEAN IBJJF JIU JITSU NO GI CHAMPIONSHIP" ~ "Europeans",
+  .default = Tournament
+)]
+dt_Tournaments <- dt_Tournaments[,.N, , by = c("Type","Tournament","Weight_Class")]
+dt_Tournaments <- dt_Tournaments[, Total := sum(N), by = c("Tournament","Type")]
+dt_Tournaments <- dt_Tournaments[, Proportion := round(N/Total,3)]
+
+#GI Tournaments plotting.
+dt_Tournaments_GI <- dt_Tournaments[Type == "GI"]
+Plot_Tournaments_GI <- dt_Tournaments_GI %>%
+  ggplot(aes(x = Weight_Class, y = Proportion)) +
+  geom_col(fill = "darkorange1", color = "black")+
+  facet_wrap(vars(Tournament), ncol = 4, nrow = 1) +
+  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  labs(
+    title = "Absolute Placings by Tournament : GI",
+    subtitle = "Percentage of medals won by weight class.",
+    caption = "Placings include taking 2nd or 3rd in the absolute.",
+    x = "Weight Class",
+    y = "Proportion"
+  )+
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    plot.subtitle = element_text(size = 12),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("Tournaments_GI" = Plot_Tournaments_GI))
 
 
-#Placings Analysis
+#NO-GI Tournaments plotting.
+dt_Tournaments_NO_GI <- dt_Tournaments[Type == "NO-GI"]
+Plot_Tournaments_NO_GI <- dt_Tournaments_NO_GI %>%
+  ggplot(aes(x = Weight_Class, y = Proportion)) +
+  geom_col(fill = "darkorange1", color = "black")+
+  facet_wrap(vars(Tournament), ncol = 4, nrow = 1) +
+  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  labs(
+    title = "Absolute Placings by Tournament : NO-GI",
+    subtitle = "Percentage of medals won by weight class.",
+    caption = "Placings include taking 2nd or 3rd in the absolute.",
+    x = "Weight Class",
+    y = "Proportion"
+  )+
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    plot.subtitle = element_text(size = 12),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("Tournaments_NO_GI" = Plot_Tournaments_NO_GI))
+
+
+#Placings Analysis ####
 #Do we see certain weight classes taking absolute placing 1, 2, or 3?
 dt_Placings <- dt_Absolute_Results[!is.na(Weight_Class), .(Weight_Class,Placing_Absolute,Placing_Weight_Class)]
 dt_Placings_Absolute <- dt_Placings

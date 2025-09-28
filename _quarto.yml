@@ -20,3 +20,5 @@ website:
         text: Data Details
       - href: About_Me.qmd
         text: About Me
+      - href: Conclusion.qmd
+        text: Conclusion
