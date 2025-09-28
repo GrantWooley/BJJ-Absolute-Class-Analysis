@@ -1,4 +1,6 @@
 ```{r}
+#| warning: false
+#| message: false
 #| echo: false
 source("R/Vars.R")
 ```
