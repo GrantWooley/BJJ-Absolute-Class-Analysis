@@ -204,6 +204,34 @@ List_Plots <- append(List_Plots,list("Placings_Weight_Class" = Plot_Placings_Wei
 
 
 
+#Note: Graph How many Competitors placed in the absolute per weight class placing.
+# I.e. 100 competitors who took 1st in their weight class made the absolute podium.
+# 200 competitors who took 2nd in their weight class made the absolute podium. etc… Will do soon.
+dt_Placings_Distribution <- dt_Placings
+dt_Placings_Distribution <- dt_Placings_Distribution[!is.na(Placing_Weight_Class)]
+dt_Placings_Distribution <- dt_Placings_Distribution[, .N, by = c("Placing_Weight_Class")]
+
+Plot_Placings_Distribution <- dt_Placings_Distribution %>%
+  ggplot(aes(x =Placing_Weight_Class, y = N))+
+  geom_col( fill = "darkorange1", color = "black") +
+  geom_text(aes(label = N), vjust = -0.5) +
+  labs(
+    title = "Absolute Placings by Weight Class Placing",
+    subtitle = paste0("# of Observations: ",sum(dt_Placings_Distribution$N)),
+    x = "Weight Class Placing",
+    y = "Count"
+  )+
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text( hjust = 1, face = "bold"),
+  )
+
+List_Plots <- append(List_Plots,list("Placings_Distribution" = Plot_Placings_Distribution))
+
+
 #Perhaps the lower weight classes often place in the absolute, but only the heavy weight classes take first. Break down of what percent of each absoute placing
 #is made up of different weight classes.
 
