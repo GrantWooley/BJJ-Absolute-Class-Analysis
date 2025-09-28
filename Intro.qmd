@@ -1,0 +1,7 @@
+---
+title: "Intro"
+format: html
+editor: visual
+---
+
+Page for giving an intro to the project and giving background information for those not familiar with Jiu Jitsu.

@@ -1,0 +1,7 @@
+---
+title: "Tournament Analysis"
+format: html
+editor: visual
+---
+
+page where I do analysis based on tournament.

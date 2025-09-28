@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "Tournament_Analysis.html",
+    "href": "Tournament_Analysis.html",
+    "title": "Tournament Analysis",
+    "section": "",
+    "text": "page where I do analysis based on tournament."
+  },
+  {
     "objectID": "Placing_Analysis.html",
     "href": "Placing_Analysis.html",
     "title": "Placing Analysis",
@@ -21,10 +28,38 @@
     "text": "When looking at the relationship between how well a competitor placed in their weight class in comparison to the Absolute class, unsurprisingly we see that the better a competitor does in their weight class the more likely they are to do well in the absolute class. Although it is still striking to see that nearly %80 of 1st place winners of the absolute took 1st int their weight class. In short taking 1st in your weight class is a very strong signal you will perform well in the absolute.\n\n\n\n\n\n\n\n\n\nWhen we look at the overall distribution of Competitors that made the podium in the absolute class, we see the trend of 1st place winners from the weight class performing well in the absolute holds. Out of all competitors who placed in the absolute at all the vast majority were those who had placed 1st in their weight class division."
   },
   {
+    "objectID": "Intro.html",
+    "href": "Intro.html",
+    "title": "Intro",
+    "section": "",
+    "text": "Page for giving an intro to the project and giving background information for those not familiar with Jiu Jitsu."
+  },
+  {
+    "objectID": "About_Me.html",
+    "href": "About_Me.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Page where give a brief about me page including picture etc…"
+  },
+  {
+    "objectID": "Data_Details.html",
+    "href": "Data_Details.html",
+    "title": "Data Details",
+    "section": "",
+    "text": "Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc…"
+  },
+  {
     "objectID": "Overview.html",
     "href": "Overview.html",
     "title": "BJJ Absolute Class Analysis",
     "section": "",
     "text": "This project aims to determine using data what weight a competitor needs to be to have realistic chance of winning the Absolute class at the highest levels.\nThe project looks at Tournament data from the entire history of the IBJJF. Only considering the Black Belt level for both GI and No-GI at the following major tournaments.\nIBJJF Worlds\nIBJJF Pans\nIBJJF Europeans\nBrazilian Nationals\n\nFirst Look\nOn our first look of the data a few insights stand out.\n\nThere is clear up tick in placings starting at Medium Heavy and a consistent drop off at Ultra Heavy. This leads me to believe that you need to be big enough to place in the absolute, but weight has diminishing returns. We likely see the drop off at Ultra Heavy due to many of these athletes being Ultra Heady due to excess body weight and not necessarily pure size and stature. Perhaps causing them to be not as athletic in comparison to the slightly smaller competitors in the Super Heavy etc… weight classes, that contain a weight class.\n\n\n\n\n\n\n\n\n\n\n\nThere seems to be no meaningful difference between the GI and NO-GI categories and our overall trend holds.\n\n\n\n\n\n\n\n\n\n\n\nInterestingly we do see a difference between Male and Female categories. With the Female category having a noticeably flatter distribution. This could imply that weight is less important to placing in the absolute for women. However our dataset is small enough that this may be caused by a small sample size. If we took data across all belt levels, or a larger set of tournaments we could be more confident in this trend."
+  },
+  {
+    "objectID": "Time_Series_Analysis.html",
+    "href": "Time_Series_Analysis.html",
+    "title": "Time Series Analysis",
+    "section": "",
+    "text": "page where I do the various time series analysis."
   }
 ]

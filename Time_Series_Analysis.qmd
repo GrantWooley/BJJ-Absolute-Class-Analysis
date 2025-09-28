@@ -1,0 +1,7 @@
+---
+title: "Time Series Analysis"
+format: html
+editor: visual
+---
+
+page where I do the various time series analysis.

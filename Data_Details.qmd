@@ -1,0 +1,7 @@
+---
+title: "Data Details"
+format: html
+editor: visual
+---
+
+Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc...

@@ -6,7 +6,17 @@ website:
   title: "BJJ Absolute Class Analysis"
   navbar:
     left:
+      - href: Intro.qmd
+        text: Intro
       - href: Overview.qmd
         text: Overview
       - href: Placing_Analysis.qmd
         text: Placing Analysis
+      - href: Tournament_Analysis.qmd
+        text: Tournament Analysis
+      - href: Time_Series_Analysis.qmd
+        text: Time Series Analysis
+      - href: Data_Details.qmd
+        text: Data Details
+      - href: About_Me.qmd
+        text: About Me
