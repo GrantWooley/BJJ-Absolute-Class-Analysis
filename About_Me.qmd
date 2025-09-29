@@ -2,6 +2,16 @@
 title: "About Me"
 format: html
 editor: visual
+about:
+  template: solana
+  image: profile.jpeg
+  links:
+    - icon: linkedin
+      text: linkedin
+      href: https://www.linkedin.com/in/grantwooley/
+    - icon: github
+      text: Github
+      href: https://github.com/GrantWooley/BJJ-Absolute-Class-Analysis
 ---
 
 Page where give a brief about me page including picture etc...
