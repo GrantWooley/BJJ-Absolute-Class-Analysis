@@ -24,7 +24,7 @@ website:
         text: About Me
     right:
       - icon: github
-        href: https://github.com/
+        href: https://github.com/GrantWooley/BJJ-Absolute-Class-Analysis/tree/master
         aria-label: GitHub
       - icon: linkedin
         href: https://www.linkedin.com/in/grantwooley/
