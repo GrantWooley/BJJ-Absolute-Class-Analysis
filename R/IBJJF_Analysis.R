@@ -115,14 +115,6 @@ Plot_Gender <- dt_Absolute_Gender %>%
 
 List_Plots <- append(List_Plots,list("Gender" = Plot_Gender))
 
-#Trends over time Analysis ####
-#As the sport has matured have we seen the average weight of competitors that place or win the absolute change over time?
-#Plot at a macro level.
-#Plot at Placing Level.
-#Plot at a Malve Vs Female level
-#Plot at a tournament level.
-#Plot at GI vs No-GI level.
-#Remember in early years, women had mixed belts.
 
 #Tournaments Analysis
 #Does the tournament play a role at all in who can place in the absolute, perhaps in Brazil where the sport is very mature its mostly heavier competitors.
@@ -299,10 +291,120 @@ Plot_Placings_Distribution <- dt_Placings_Distribution %>%
 
 List_Plots <- append(List_Plots,list("Placings_Distribution" = Plot_Placings_Distribution))
 
+#Trends over time Analysis ####
+#As the sport has matured have we seen the average weight of competitors that place or win the absolute change over time?
+dt_Time_Series <- dt_Absolute_Results[!is.na(Weight_Class), .(Year,Tournament,Type,Belt,Gender,Weight_Class,Weight,UOM, Placing_Absolute,Placing_Weight_Class)]
+dt_Time_Series <- dt_Time_Series[, Year := as.Date(paste0(Year,"0101"), format = "%Y%m%d")]
 
-#Perhaps the lower weight classes often place in the absolute, but only the heavy weight classes take first. Break down of what percent of each absoute placing
-#is made up of different weight classes.
+#In the following plots I use geom_smooth with LOESS (LOcal regrESSion). The data is realtively nosiy,
+#and the goal with this section of the analysis is to spot a trend, not strictly show results with something
+#like geom_line.
 
+#Analyzing 1st place winnders.
+dt_TS_First_Place <- dt_Time_Series[Placing_Absolute == 1]
+dt_TS_First_Place <- dt_TS_First_Place[, .(Avg_Weight = round(mean(Weight,na.rm = TRUE),2)), by = c("Type","Gender", "Year")]
+
+Plot_TS_First_Place_Male <- dt_TS_First_Place[Gender == "Male"] %>%
+  ggplot(aes(x = Year,y = Avg_Weight)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(vars(Type)) +
+  scale_x_date(
+    date_breaks = "2 year",
+    date_labels = "%Y"
+  )+
+  labs(
+    title = "Avg Weight 1st Place Medalists : Male",
+    subtitle = "Trend over time, LOESS method.",
+    x = "Average Weight",
+    y = "Year"
+    ) +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text( hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("TS_First_Place_M" = Plot_TS_First_Place_Male))
+
+Plot_TS_First_Place_Female <- dt_TS_First_Place[Gender == "Female"] %>%
+  ggplot(aes(x = Year,y = Avg_Weight)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(vars(Type)) +
+  scale_x_date(
+    date_breaks = "2 year",
+    date_labels = "%Y"
+  )+
+  labs(
+    title = "Avg Weight 1st Place Medalists : Female",
+    subtitle = "Trend over time, LOESS method.",
+    x = "Average Weight",
+    y = "Year"
+  ) +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text( hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("TS_First_Place_F" = Plot_TS_First_Place_Female))
+
+
+dt_TS_Two_Three_Place <- dt_Time_Series[Placing_Absolute != 1]
+dt_TS_Two_Three_Place <- dt_TS_Two_Three_Place[, .(Avg_Weight = round(mean(Weight,na.rm = TRUE),2)), by = c("Type","Gender", "Year")]
+
+Plot_TS_Two_Three_Place_Male <- dt_TS_Two_Three_Place[Gender == "Male"] %>%
+  ggplot(aes(x = Year,y = Avg_Weight)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(vars(Type)) +
+  scale_x_date(
+    date_breaks = "2 year",
+    date_labels = "%Y"
+  )+
+  labs(
+    title = "Avg Weight 2nd & 3rd Place Medalists : Male",
+    subtitle = "Trend over time, LOESS method.",
+    x = "Average Weight",
+    y = "Year"
+  ) +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text( hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("TS_Two_Three_Place_M" = Plot_TS_Two_Three_Place_Male))
+
+Plot_TS_Two_Three_Place_Female <- dt_TS_Two_Three_Place[Gender == "Female"] %>%
+  ggplot(aes(x = Year,y = Avg_Weight)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(vars(Type)) +
+  scale_x_date(
+    date_breaks = "2 year",
+    date_labels = "%Y"
+  )+
+  labs(
+    title = "Avg Weight 2nd & 3rd Place Medalists : Female",
+    subtitle = "Trend over time, LOESS method.",
+    x = "Average Weight",
+    y = "Year"
+  ) +
+  theme(
+    plot.title = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 15,face = "bold"),
+    axis.title.y = element_text(size = 15,face = "bold"),
+    axis.text.x = element_text( hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
+  )
+
+List_Plots <- append(List_Plots,list("TS_Two_Three_Place_F" = Plot_TS_Two_Three_Place_Female))
+
+#Save Plots
 List_Plot_Names <- paste0(Path_Plots,"/",names(List_Plots), ".rds")
 map2(List_Plots, List_Plot_Names,~saveRDS(object = .x, file = .y))
 
