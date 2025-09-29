@@ -17,15 +17,20 @@ dt_IBJFF_Weight_Classes <- data.table(
           "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult"),
   Gender = c("Male","Male","Male","Male","Male","Male","Male","Male","Male",
              "Female","Female","Female","Female","Female","Female","Female","Female",
-             "Male","Male","Male","Male","Male","Male","Male","Male","Male", "Female","Female","Female","Female","Female","Female","Female","Female"),
+             "Male","Male","Male","Male","Male","Male","Male","Male","Male",
+             "Female","Female","Female","Female","Female","Female","Female","Female"),
   Weight_Class = c("ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY",
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY"),
-  Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, NA,
-             107.0,118.0,129.0,141.6,152.6,163.6,175.0, NA,
-             122.6,136.0,149.0,162.6,175.6,188.6,202,215,NA,
-             103.0,114.0,125.0,136.0,147.0,158.0,169.0,NA)
+  #For Super Heavy Female, and Ultra Heavy Male there is no actual weight defined by IBJJF. It is uncapped, but to make time series
+  #plots work correctly we need to declare an actual weight. I took the average weight diference between each Type/Gender category
+  #combination to set the weight for Super Heavy and Ultra Heavy. This biases some of the anlysis in favor of lighter competitors/weights.
+  #I think this bias is acceptable to produce good time series plots.
+  Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, 236.0,
+             107.0,118.0,129.0,141.6,152.6,163.6,175.0, 186.4,
+             122.6,136.0,149.0,162.6,175.6,188.6,202,215,228.0,
+             103.0,114.0,125.0,136.0,147.0,158.0,169.0,180.0)
 )
 dt_IBJFF_Weight_Classes <- dt_IBJFF_Weight_Classes[, UOM := "lbs"]
 
