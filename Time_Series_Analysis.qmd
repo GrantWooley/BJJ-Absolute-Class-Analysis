@@ -1,3 +1,10 @@
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+source("R/Vars.R")
+```
+
 ---
 title: "Time Series Analysis"
 format: html
@@ -5,3 +12,15 @@ editor: visual
 ---
 
 page where I do the various time series analysis.
+
+```{r}
+#| echo: false
+read_Plot("TS_First_Place_M.rds")
+read_Plot("TS_First_Place_F.rds")
+```
+
+```{r}
+#| echo: false
+read_Plot("TS_Two_Three_Place_M.rds")
+read_Plot("TS_Two_Three_Place_F.rds")
+```
