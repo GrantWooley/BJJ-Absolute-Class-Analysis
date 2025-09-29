@@ -22,7 +22,6 @@ website:
         text: Conclusion
       - href: About_Me.qmd
         text: About Me
-
     right:
       - icon: github
         href: https://github.com/

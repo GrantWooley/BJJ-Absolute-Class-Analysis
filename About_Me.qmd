@@ -4,7 +4,7 @@ format: html
 editor: visual
 about:
   template: solana
-  image: profile.jpeg
+  image: profile_picture.jpg
   links:
     - icon: linkedin
       text: linkedin
@@ -14,4 +14,4 @@ about:
       href: https://github.com/GrantWooley/BJJ-Absolute-Class-Analysis
 ---
 
-Page where give a brief about me page including picture etc...
+Hi there, I'm Grant. I'm currently a Senior Data Analyst working in Supply Chain and an avid Brazilian Jiu-Jitsu competitor and practitioner.
