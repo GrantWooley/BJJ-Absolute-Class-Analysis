@@ -4,7 +4,7 @@ format: html
 editor: visual
 about:
   template: solana
-  image: profile_picture.jpg
+  image: img/profile_picture.jpg
   links:
     - icon: linkedin
       text: linkedin
