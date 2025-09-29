@@ -18,7 +18,15 @@ website:
         text: Time Series Analysis
       - href: Data_Details.qmd
         text: Data Details
-      - href: About_Me.qmd
-        text: About Me
       - href: Conclusion.qmd
         text: Conclusion
+      - href: About_Me.qmd
+        text: About Me
+
+    right:
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/grantwooley/
+        aria-label: Linkedin
