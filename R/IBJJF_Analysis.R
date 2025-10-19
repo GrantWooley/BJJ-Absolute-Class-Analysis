@@ -62,7 +62,7 @@ Plot_Type <- dt_Absolute_Type %>%
   ggplot(aes(x =Weight_Class, y = Proportion))+
   geom_col(fill = "darkorange1", color = "black")+
   facet_wrap(vars(Type))+
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  geom_text(aes(label = scales::percent(Proportion, accuracy = Percent_Accuracy)), vjust = -0.5, size = Percent_Size) +
   labs(
     title = "GI vs NO-GI Proportion",
     subtitle = paste0("Observations  GI: ",Observations_GI, "  NO-GI: ",Observations_NO_GI),
@@ -95,7 +95,7 @@ Plot_Gender <- dt_Absolute_Gender %>%
   ggplot(aes(x =Weight_Class, y = Proportion))+
   geom_col(fill = "darkorange1", color = "black")+
   facet_wrap(vars(Gender))+
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  geom_text(aes(label = scales::percent(Proportion, accuracy = Percent_Accuracy)), vjust = -0.5, size = Percent_Size) +
   labs(
     title = "Female vs Male Proportion",
     subtitle = paste0("Observations  Female: ",Observations_Female, "  Male: ",Observations_Male),
@@ -140,8 +140,8 @@ dt_Tournaments_GI <- dt_Tournaments[Type == "GI"]
 Plot_Tournaments_GI <- dt_Tournaments_GI %>%
   ggplot(aes(x = Weight_Class, y = Proportion)) +
   geom_col(fill = "darkorange1", color = "black")+
-  facet_wrap(vars(Tournament), ncol = 4, nrow = 1) +
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  facet_wrap(vars(Tournament), ncol = 2, nrow = 2) +
+  geom_text(aes(label = scales::percent(Proportion,accuracy = Percent_Accuracy)), vjust = -0.5, size = Percent_Size) +
   labs(
     title = "Absolute Placings by Tournament : GI",
     subtitle = "Percentage of medals won by weight class.",
@@ -167,8 +167,8 @@ dt_Tournaments_NO_GI <- dt_Tournaments[Type == "NO-GI"]
 Plot_Tournaments_NO_GI <- dt_Tournaments_NO_GI %>%
   ggplot(aes(x = Weight_Class, y = Proportion)) +
   geom_col(fill = "darkorange1", color = "black")+
-  facet_wrap(vars(Tournament), ncol = 4, nrow = 1) +
-  geom_text(aes(label = scales::percent(Proportion)), vjust = -0.5) +
+  facet_wrap(vars(Tournament), ncol = 2, nrow = 2) +
+  geom_text(aes(label = scales::percent(Proportion, accuracy = Percent_Accuracy)), vjust = -0.5, size = Percent_Size) +
   labs(
     title = "Absolute Placings by Tournament : NO-GI",
     subtitle = "Percentage of medals won by weight class.",
@@ -286,7 +286,8 @@ Plot_Placings_Distribution <- dt_Placings_Distribution %>%
     plot.title = element_text(size = 30, face = "bold"),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text( hjust = 1, face = "bold"),
+    axis.text.x = element_text(angle = 45,hjust = 1, face = "bold"),
+    strip.text = element_text(size = 16, face = "bold")
   )
 
 List_Plots <- append(List_Plots,list("Placings_Distribution" = Plot_Placings_Distribution))
@@ -322,7 +323,7 @@ Plot_TS_First_Place_Male <- dt_TS_First_Place[Gender == "Male"] %>%
     plot.title = element_text(size = 30, face = "bold"),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text( hjust = 1, face = "bold"),
+    axis.text.x = element_text(angle = 45,  hjust = 1, face = "bold"),
     strip.text = element_text(size = 16, face = "bold")
   )
 
@@ -346,7 +347,7 @@ Plot_TS_First_Place_Female <- dt_TS_First_Place[Gender == "Female"] %>%
     plot.title = element_text(size = 30, face = "bold"),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text( hjust = 1, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
     strip.text = element_text(size = 16, face = "bold")
   )
 
@@ -374,7 +375,7 @@ Plot_TS_Two_Three_Place_Male <- dt_TS_Two_Three_Place[Gender == "Male"] %>%
     plot.title = element_text(size = 30, face = "bold"),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text( hjust = 1, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
     strip.text = element_text(size = 16, face = "bold")
   )
 
@@ -398,17 +399,13 @@ Plot_TS_Two_Three_Place_Female <- dt_TS_Two_Three_Place[Gender == "Female"] %>%
     plot.title = element_text(size = 30, face = "bold"),
     axis.title.x = element_text(size = 15,face = "bold"),
     axis.title.y = element_text(size = 15,face = "bold"),
-    axis.text.x = element_text( hjust = 1, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
     strip.text = element_text(size = 16, face = "bold")
   )
+
 
 List_Plots <- append(List_Plots,list("TS_Two_Three_Place_F" = Plot_TS_Two_Three_Place_Female))
 
 #Save Plots
 List_Plot_Names <- paste0(Path_Plots,"/",names(List_Plots), ".rds")
 map2(List_Plots, List_Plot_Names,~saveRDS(object = .x, file = .y))
-
-
-
-#Optional Analysis, what competitor won the absolute the most.
-#What academy won the absolute the most.

@@ -14,6 +14,11 @@ Path_Plots <- file.path(Path_Data,"plots")
 File_Results <- "IBJJF_Results_Weight_Class.rds"
 File_Absolute_Results <- "IBJJF_Results_Absolute.rds"
 
+#Scoping issue with scales::percent() requires these vars to be loaded before pulling plot objects.
+#Variables used to control scale_percent label size and accuracy across multiple plots
+Percent_Size <- 3.3
+Percent_Accuracy <- 0.1
+
 read_Plot <- function(plotFile){
   readRDS(file.path(Path_Plots,plotFile))
 }

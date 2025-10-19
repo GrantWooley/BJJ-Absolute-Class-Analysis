@@ -5,9 +5,8 @@ project:
 format:
   html:
     code-fold: true
-    fig-width: 6
-    fig-height: 50
-    fig-asp: 0.618
+    fig-asp: 0.8
+    fig-width: 8
 
 execute:
   echo: false

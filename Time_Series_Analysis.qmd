@@ -12,14 +12,18 @@ editor: visual
 
 page where I do the various time series analysis.
 
-```{r}
+```{r fig.width=10}
 #| label: TimeSeriesAnalysis_Plot_FirstPlace
+#| warning: false
+#| message: false
 read_Plot("TS_First_Place_M.rds")
 read_Plot("TS_First_Place_F.rds")
 ```
 
-```{r}
+```{r fig.width=10}
 #| label: TimeSeriesAnalysis_Plot_TwoThreePlace
+#| warning: false
+#| message: false
 read_Plot("TS_Two_Three_Place_M.rds")
 read_Plot("TS_Two_Three_Place_F.rds")
 ```
