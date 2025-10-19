@@ -14,11 +14,11 @@ editor: visual
 So far we've looked at trends for broad categories, such as GI vs NO-GI or Female vs Male, but when we get more granular do our conclusions continue to hold? Perhaps at Brazilian Nationals we'll see the Weight you need to be to podium tends to be higher due to Brazil being the most developed region. Maybe for Euros we'll see a lower weight doing well, given Europe tends to have a thinner population compared to somewhere like the U.S. Or perhaps well see a clear divide between Euros and Brazilian Nationals compared to Pans and Worlds. As arguably Worlds and Pans are higher tiered tournaments.
 
 ```{r}
-#| echo: false
+#| label: TournamentAnalysis_Plot_GI
 read_Plot("Tournaments_GI.rds")
 ```
 
 ```{r}
-#| echo: false
+#| label: TournamentAnalysis_Plot_NOGI
 read_Plot("Tournaments_NO_GI.rds")
 ```
