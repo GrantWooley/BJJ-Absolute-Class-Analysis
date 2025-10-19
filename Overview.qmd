@@ -1,7 +1,6 @@
 ```{r}
 #| warning: false
 #| message: false
-#| echo: false
 source("R/Vars.R")
 ```
 
@@ -23,22 +22,19 @@ On our first look of the data a few insights stand out.
 
 1.  There is clear up tick in placings starting at Medium Heavy and a consistent drop off at Ultra Heavy. This leads me to believe that you need to be big enough to place in the absolute, but weight has diminishing returns. We likely see the drop off at Ultra Heavy due to many of these athletes being Ultra Heady due to excess body weight and not necessarily pure size and stature. Perhaps causing them to be not as athletic in comparison to the slightly smaller competitors in the Super Heavy etc... weight classes, that contain a weight class.
 
-```{r}
-#| echo: false
+```{r fig.width=8,fig.asp=0.8}
 read_Plot("Overview.rds")
 ```
 
 2.  There seems to be no meaningful difference between the GI and NO-GI categories and our overall trend holds.
 
 ```{r}
-#| echo: false
 read_Plot("Type.rds")
 ```
 
 3.  Interestingly we do see a difference between Male and Female categories. With the Female category having a noticeably flatter distribution. This could imply that weight is less important to placing in the absolute for women. However our dataset is small enough that this may be caused by a small sample size. If we took data across all belt levels, or a larger set of tournaments we could be more confident in this trend.
 
 ```{r}
-#| echo: false
 read_Plot("Gender.rds")
 
 ```
