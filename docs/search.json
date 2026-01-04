@@ -91,7 +91,40 @@
     "href": "Data_Details.html",
     "title": "Data Details",
     "section": "",
-    "text": "Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc…\ngive a definition of jiu jitsu with a link to wikipedia\nshow ibjjf weight class chart\nwhat is GI?\nwhat is no gi?\nhow far does the data go back?",
+    "text": "Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc…",
+    "crumbs": [
+      "About Me",
+      "Data Details"
+    ]
+  },
+  {
+    "objectID": "Data_Details.html#definitions",
+    "href": "Data_Details.html#definitions",
+    "title": "Data Details",
+    "section": "Definitions:",
+    "text": "Definitions:\ngive a definition of jiu jitsu with a link to wikipedia\nwhat is GI?\nwhat is no gi?",
+    "crumbs": [
+      "About Me",
+      "Data Details"
+    ]
+  },
+  {
+    "objectID": "Data_Details.html#data-sourcing",
+    "href": "Data_Details.html#data-sourcing",
+    "title": "Data Details",
+    "section": "Data Sourcing:",
+    "text": "Data Sourcing:\nhow far does the data go back?\nAll data was collected via web scraping the IBJJF Results web pages - https://ibjjf.com/events/results\nThe current data set can be found on kaggle.com here -",
+    "crumbs": [
+      "About Me",
+      "Data Details"
+    ]
+  },
+  {
+    "objectID": "Data_Details.html#ibjjf-weight-classes",
+    "href": "Data_Details.html#ibjjf-weight-classes",
+    "title": "Data Details",
+    "section": "IBJJF Weight Classes:",
+    "text": "IBJJF Weight Classes:\n\nGi Weight Chart\n\n\n\nNo Gi Weight Chart",
     "crumbs": [
       "About Me",
       "Data Details"

@@ -6,12 +6,28 @@ editor: visual
 
 Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc...
 
-give a definition of jiu jitsu with a link to wikipedia
+## [Definitions:]{.underline}
 
-show ibjjf weight class chart
+give a definition of jiu jitsu with a link to wikipedia
 
 what is GI?
 
 what is no gi?
 
+## [Data Sourcing:]{.underline}
+
 how far does the data go back?
+
+All data was collected via web scraping the IBJJF Results web pages - <https://ibjjf.com/events/results>
+
+The current data set can be found on kaggle.com here -
+
+## [IBJJF Weight Classes:]{.underline}
+
+#### [Gi Weight Chart]{.underline}
+
+![](img/weightchart_gi.png)
+
+#### [No Gi Weight Chart]{.underline}
+
+![](img/weightchart_nogi.png)
