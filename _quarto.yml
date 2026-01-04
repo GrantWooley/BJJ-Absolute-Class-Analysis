@@ -14,9 +14,20 @@ execute:
 website:
   title: "BJJ Absolute Class Analysis"
   navbar:
-    left:
+    right:
+      - href: About_Me.qmd
+        text: About Me
+      - icon: github
+        href: https://github.com/GrantWooley/BJJ-Absolute-Class-Analysis/tree/master
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/grantwooley/
+        aria-label: Linkedin
+  sidebar:
+    style: "docked"
+    contents:
       - href: index.qmd
-        text: Intro
+        text: Introduction
       - href: Overview.qmd
         text: Overview
       - href: Placing_Analysis.qmd
@@ -29,12 +40,5 @@ website:
         text: Data Details
       - href: Conclusion.qmd
         text: Conclusion
-      - href: About_Me.qmd
-        text: About Me
-    right:
-      - icon: github
-        href: https://github.com/GrantWooley/BJJ-Absolute-Class-Analysis/tree/master
-        aria-label: GitHub
-      - icon: linkedin
-        href: https://www.linkedin.com/in/grantwooley/
-        aria-label: Linkedin
+
+    

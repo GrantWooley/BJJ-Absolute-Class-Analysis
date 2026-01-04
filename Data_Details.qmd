@@ -5,3 +5,13 @@ editor: visual
 ---
 
 Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc...
+
+give a definition of jiu jitsu with a link to wikipedia
+
+show ibjjf weight class chart
+
+what is GI?
+
+what is no gi?
+
+how far does the data go back?

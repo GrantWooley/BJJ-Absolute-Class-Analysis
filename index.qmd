@@ -1,7 +1,23 @@
 ---
-title: "Intro"
+title: "Introduction"
 format: html
 editor: visual
 ---
 
-Page for giving an intro to the project and giving background information for those not familiar with Jiu Jitsu.
+Brazilian Jiu Jitsu, BJJ for short, is often said to be a sport suited for smaller individuals. Allowing smaller individuals the ability to defeat larger opponents through a combination of technique, timing, and leverage. Flipping the common notion that size and strength are the primary deciding factors in who wins a fights on its head. This idea is often used to promote BJJ as a sport and self defense system and is commonly talked about in the BJJ community. As an avid practitioner and competitor of the sport for many years I've often been the skeptical person in conversations around "does size matter". My experience has been that while BJJ does allow a smaller opponent to beat a larger one that this largely only applies when the larger opponent is untrained in combat sports and the size discrepancy is not to large.
+
+In BJJ competition there is a division called the Absolute Class where the idea that "size doesn't matter" is on full display. The Absolute Class is a division where competitors compete against each other regardless of their weightclass. For example a 127.0lb Rooster weight competitor can compete against a 222.0lb Super Heavy competitor in an Absolute Class bracket. So, if BJJ does allow a smaller opponent to beat a larger one we should see smaller competitors winning the absolute class in tournaments. While we see this at smaller local level tournaments does this still hold true at the highest level of competition? Where the competitors are all extremely skilled and equally dedicated to the sport.
+
+In this project I'm combining my passion for BJJ with my professional data analysis skills to see what does the data really say. In the hopes of answering the question, how much do you really need to weigh to win or place in the Absolute Division at a Major BJJ tournament.
+
+For the project I'm looking at tournament results from the IBJFF. The oldest, largest, and arguably most prestigious tournament organizer in Jiu Jitsu. I'm only looking at what I consider to be the four major IBJJF tournaments:
+
+-IBJJF Worlds
+
+-IBJJF Pans
+
+-IBJFF Europeans
+
+-IBJJF Brazilian Nationals
+
+\*Note: Brazilian Nationals is included as a major tournament, because with the sport originating in Brazil it was long thought that Brazilian Nationals was as or more difficult to win as the other 3 major tournaments. Due to the fact that the sport was more developed in the Brazil with many of the best athletes living and comepting there but unable to travel to the other 3 tournaments for primariily financial reasons.
