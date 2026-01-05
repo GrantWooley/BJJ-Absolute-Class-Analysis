@@ -1,4 +1,4 @@
-#Script to do analysis after inital data cleansing.
+#Script to do analysis after initial data cleansing.
 rm(list = ls())
 
 library(here)
