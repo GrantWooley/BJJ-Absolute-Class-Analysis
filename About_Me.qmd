@@ -20,7 +20,7 @@ Thanks so much for checking out my project. Below are some details about my prof
 
 ## [Data Skills:]{.underline}
 
-I've been working in data analytics for roughly **4.5 years**. Having skills in data wrangling, data mining, statistics, and data engineering. I'm very passionate about the data field with aspirations of moving into data engineering in the future. I'm constantly learning and growing my data skills both at work and at home. Having taken courses and read technical books in my free time.
+I've been working in data analytics for roughly **4.5 years**. Having skills in data wrangling, data mining, statistics, and data engineering. I'm very passionate about the data field with aspirations of moving into data engineering in the future. I'm constantly learning and growing my data skills both at work and at home. In my free time, I've taken courses and read technical books.
 
 I'm also currently a **part-time Computer Science student at Colorado State University**, completing my degree online while working full-time as a **Senior Data Analyst**.\
 \
@@ -40,28 +40,28 @@ For visualization software I've worked with:
 
 -   **Tableau**
 
-Having built dashboards in both for telling data driven stories and more easily communicating insights to stakeholders.
+I have built dashboards in both for telling data driven stories and more easily communicating insights to stakeholders.
 
-Uniquely for an analyst I also regularly do shell scripting using:
+Uniquely for an analyst, I regularly do shell scripting using:
 
 -   **CMD**
 
--    **PowerShell**
+-   **PowerShell**
 
--    **Bash**
+-   **Bash**
 
 I'm highly skilled with **Excel** although I now primarily use it for ad hoc analysis and quick exploratory work.
 
 ## [My Jiu Jitsu Journey:]{.underline}
 
-As of Jan 2026 I've been training BJJ for a little over five years. I started training in Colorado Springs, Co before moving to Chicago, IL as a blue belt. In my first four years I was a very active competitor, competing several times a year, traveling all over the USA, and having done 20+ competitions. I plan to begin competing more regularly again in 2026.
+As of Jan 2026 I've been training BJJ for a little over five years. I started training in Colorado Springs, CO before moving to Chicago, IL as a blue belt. In my first four years I was a very active competitor, competing several times a year, traveling all over the USA, and having done 20+ competitions. I plan to begin competing more regularly again in 2026.
 
 In the last two years I've began teaching at my gym when our main instructors are unable to teach due to travel, sickness, etc... I've found I have a true passion for teaching and hope to continue to get more opportunities to do so in the future.
 
 While, I've always trained and competed in both Gi and No-Gi I have a special passion for the Gi with my favorite technique being the berimbolo.
 
-Jiu Jitsu came into my life during a time where I was dealing with very difficult personal issues. At the time it gave me something positive to focus on and put my energy into. I'm very grateful for what the sport and the community has done for me.\
-~\*For\ anyone\ struggling\ with\ mental\ health\ issues\ I\ encourage\ learning\ about\ [TMS](https://en.wikipedia.org/wiki/Transcranial_magnetic_stimulation).~
+Jiu Jitsu came into my life during a time where I was dealing with very difficult personal issues, giving me something positive to focus on and put my energy into. I'm very grateful for what the sport and the community has done for me.\
+~\*For anyone struggling with mental health issues I encourage learning about [TMS](https://en.wikipedia.org/wiki/Transcranial_magnetic_stimulation).~
 
 [**Photos from over the years:**]{.underline}
 
@@ -81,6 +81,6 @@ A few competition photos at IBJJF Chicago as a purple belt.
 
 ![](img/comp_photo_3.jpg){width="432"}
 
-A recent photo of promotions at my gym in 2026. Celebrating my friend James getting promoted to black belt.
+A recent photo of promotions at my gym in 2026. Celebrating my friend James (left) getting promoted to black belt.
 
 ![](img/Jan_2026_promotions.jpg){width="432"}
