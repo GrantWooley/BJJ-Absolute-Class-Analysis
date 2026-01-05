@@ -91,7 +91,7 @@
     "href": "Data_Details.html",
     "title": "Data Details",
     "section": "",
-    "text": "Page where I go into the details of the data. Where it came from. Issues with cleaning the data etc…",
+    "text": "Brazilian Jiu Jitsu (BJJ) - A self-defense system, martial art, and combat sport based on grappling, ground fighting, and submission holds. Learn More\nInternational Brazilian Jiu-Jitsu Federation (IBJJF) - The largest and most prestigious tournament organizer in BJJ. IBJJF Website\nGi Jiu Jitsu - In Gi Jiu Jitsu a Gi sometimes called a kimono is worn. Being a heavy-duty uniform consisting of a jacket, pants, and belts. Grabbing or gripping the gi and belt is allowed and used for performing various techniques and submissions. Gi Jiu Jitsu is the older and more traditional form of Jiu Jitsu. Often considered slower and more methodical in comparison to No-Gi due to the gripping involved and is more heavily influenced by Judo than No-Gi.\n\n\n\nBeginning of a berimbolo sequence in a Gi competition.\n\n\nNo-Gi Jiu Jitsu - In No-Gi Jiu Jitsu spandex clothing is worn consisting of a rashguard (top), shorts, and sometimes spats (tights). In No-Gi gripping of the uniform is not allowed. No-Gi is considred faster and more dynamic than Gi Jiu Jitsu, has a wider range of legal submissions (leglocks), and is more heavily influenced by Wrestling than Gi Jiu Jitsu.\n\n\n\nRear Naked Choke being performed in  a No-Gi competition.",
     "crumbs": [
       "About Me",
       "Data Details"
@@ -101,19 +101,19 @@
     "objectID": "Data_Details.html#definitions",
     "href": "Data_Details.html#definitions",
     "title": "Data Details",
-    "section": "Definitions:",
-    "text": "Definitions:\ngive a definition of jiu jitsu with a link to wikipedia\nwhat is GI?\nwhat is no gi?",
+    "section": "",
+    "text": "Brazilian Jiu Jitsu (BJJ) - A self-defense system, martial art, and combat sport based on grappling, ground fighting, and submission holds. Learn More\nInternational Brazilian Jiu-Jitsu Federation (IBJJF) - The largest and most prestigious tournament organizer in BJJ. IBJJF Website\nGi Jiu Jitsu - In Gi Jiu Jitsu a Gi sometimes called a kimono is worn. Being a heavy-duty uniform consisting of a jacket, pants, and belts. Grabbing or gripping the gi and belt is allowed and used for performing various techniques and submissions. Gi Jiu Jitsu is the older and more traditional form of Jiu Jitsu. Often considered slower and more methodical in comparison to No-Gi due to the gripping involved and is more heavily influenced by Judo than No-Gi.\n\n\n\nBeginning of a berimbolo sequence in a Gi competition.\n\n\nNo-Gi Jiu Jitsu - In No-Gi Jiu Jitsu spandex clothing is worn consisting of a rashguard (top), shorts, and sometimes spats (tights). In No-Gi gripping of the uniform is not allowed. No-Gi is considred faster and more dynamic than Gi Jiu Jitsu, has a wider range of legal submissions (leglocks), and is more heavily influenced by Wrestling than Gi Jiu Jitsu.\n\n\n\nRear Naked Choke being performed in  a No-Gi competition.",
     "crumbs": [
       "About Me",
       "Data Details"
     ]
   },
   {
-    "objectID": "Data_Details.html#data-sourcing",
-    "href": "Data_Details.html#data-sourcing",
+    "objectID": "Data_Details.html#data-sourcing-notes",
+    "href": "Data_Details.html#data-sourcing-notes",
     "title": "Data Details",
-    "section": "Data Sourcing:",
-    "text": "Data Sourcing:\nhow far does the data go back?\nAll data was collected via web scraping the IBJJF Results web pages - https://ibjjf.com/events/results\nThe current data set can be found on kaggle.com here -",
+    "section": "Data Sourcing & Notes:",
+    "text": "Data Sourcing & Notes:\nAll data was collected via web scraping the IBJJF Results web pages - https://ibjjf.com/events/results\nThe current data set can be found on kaggle.com here.\nhow far does the data go back?\n#After doing our initial join to get the Weight of our Absolute competitors, we still have a couple hundred records where we do not know the weight #of the absolute competitor. After data exploration I’m seeing two primary reasons. 1. I see some records where a competitor only entered the absolute, and they have no #record for a regular weight division Possibly an IBJJF ruling or exception I’m unfamiliar with. Dealing with these missing weights in a multitude of ways. #2. Sometimes the competitors name was not spelled the same between their weight class entrance and their absolute class entrance.\n#For the cases where a competitor does not show up in a regular weight division for the tournament, they often show up in a different tournament under a #weight class. Find their most common weight across all records.\n#For the cases where a competitors name is spelled differently between their weight class entrance and their absolue entrance, I will split our competitior name into a First Name, #Last Name, and remaining Name columns (some competitors have many names). Then join in our results using Name, Year, Academy, etc… for each of the 3 naming categories. This should catch a large number #of these spelling errors. Note: I explored using a fuzzy match solution, but this did not work well. #dt_Results %&gt;% mutate( # Fname = str_split(Competitor_Name, ” “)\n#Tournament names are not consistent, need to account for this. I.e. Worlds has 3 different names. Correcting this issue.\n#In 2009 for the CAMPEONATO BRASILEIRO DE JIU JITSU tournament. Several Female divisions only had one entrance. They were not given a placing. However by default they would have placed 1st. #Correcting these NAs.\n#For Super Heavy Female, and Ultra Heavy Male there is no actual weight defined by IBJJF. It is uncapped, but to make time series #plots work correctly we need to declare an actual weight. I took the average weight difference between each Type/Gender category #combination to set the weight for Super Heavy and Ultra Heavy. This biases some of the analysis in favor of lighter competitors/weights. #I think this bias is acceptable to produce good time series plots.\nI had to translate stuff I don’t speak portugese I hope google translate did ok.\nwhen does female results change belts divisions?\n\n\n\nTournamnet\nPurple Brown Black\nBrown Black\nBlack\n\n\n\n\nWorlds\n1999-2004\n2005-2011\n2012\n\n\nWorlds No-Gi\nNA\n2007-2011\n2012\n\n\nPans\n1999-2005\n2006-2011\n2012\n\n\nPans No-Gi\nNA\n2007-2011\n2012\n\n\nEuropeans\n2004\n2007-2010\n2011\n\n\nEuropeans No-Gi\nNA\nNA\n2012\n\n\nBrazilian Nationals\nNA\nNA\n1998\n\n\nBrazilian Nationals No-Gi\nNA\n2009-2011\n2012\n\n\n\nearliest tournament results\n\n\n\nTournament\nEarliest Gi Year\nEarliest No-Gi Year\n\n\n\n\nWorlds\n1996\n2007\n\n\nPans\n1996\n2007\n\n\nEuropeans\n2004\n2012\n\n\nBrazilian nationals\n1994\n2009",
     "crumbs": [
       "About Me",
       "Data Details"
