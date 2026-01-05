@@ -24,8 +24,8 @@ dt_IBJFF_Weight_Classes <- data.table(
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY"),
   #For Super Heavy Female, and Ultra Heavy Male there is no actual weight defined by IBJJF. It is uncapped, but to make time series
-  #plots work correctly we need to declare an actual weight. I took the average weight diference between each Type/Gender category
-  #combination to set the weight for Super Heavy and Ultra Heavy. This biases some of the anlysis in favor of lighter competitors/weights.
+  #plots work correctly we need to declare an actual weight. I took the average weight difference between each Type/Gender category
+  #combination to set the weight for Super Heavy and Ultra Heavy. This biases some of the analysis in favor of lighter competitors/weights.
   #I think this bias is acceptable to produce good time series plots.
   Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, 236.0,
              107.0,118.0,129.0,141.6,152.6,163.6,175.0, 186.4,
@@ -133,9 +133,9 @@ dt_Absolute_Results <- dt_helper[dt_Absolute_Results,
 ]
 rm(dt_helper)
 
-#After doing our inital join to get the Weight of our Absolute compteitors, we sitll have a couple hundred records where we do not know the wieght
+#After doing our initial join to get the Weight of our Absolute competitors, we still have a couple hundred records where we do not know the weight
 #of the absolute competitor. After data exploration I'm seeing two primary reasons. 1. I see some records where a competitor only entered the absolute, and they have no
-#record for a regular weight divison. Possilby an IBJJF ruling or exception i'm unfamiliar with. Dealing with these missing weights in a multitude of ways.
+#record for a regular weight division Possibly an IBJJF ruling or exception I'm unfamiliar with. Dealing with these missing weights in a multitude of ways.
 #2. Sometimes the competitors name was not spelled the same between their weight class entrance and their absolute class entrance.
 
 #For the cases where a competitor does not show up in a regular weight division for the tournament, they often show up in a different tournament under a
@@ -143,7 +143,7 @@ rm(dt_helper)
 dt_Common_Weight <- dt_Results[Weight_Class != "ABSOLUTE", .(N = .N), by = c("Type","Gender","Weight_Class","Weight","UOM", "Belt", "Competitor_Name")]
 dt_Common_Weight <- dt_Common_Weight %>% group_by(Type,Gender, Belt, Competitor_Name) %>% filter(N == max(N)) %>% ungroup()
 #Sometimes we have a tie for the most common weight class. I.e. A competitor will have competed an equal number of times across different weight classes.
-#My hypothesis is that being heavier increases your odds of oding well in the Absolute, I want to bias the analysis against my hypothesis. So for these instacnes,
+#My hypothesis is that being heavier increases your odds of doing well in the Absolute, I want to bias the analysis against my hypothesis. So for these instances,
 #I will keep the record with the lower weight.
 dt_Common_Weight <- dt_Common_Weight %>% group_by(Type,Gender, Belt, Competitor_Name) %>% filter(Weight == min(Weight)) %>% ungroup() %>% setDT()
 #Join on our common weight to our NA records.
