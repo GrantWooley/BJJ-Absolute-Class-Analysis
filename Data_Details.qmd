@@ -15,12 +15,12 @@ editor: visual
 
 ## [Definitions:]{.underline} 
 
-<span id="def_bjj-anchor"></span>
+
 
 **Brazilian Jiu Jitsu (BJJ)** - A self-defense system, martial art, and combat sport based on grappling, ground fighting, and submission holds. [Learn More](https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu)
-<span id="def_ibjjf-anchor"></span>
+
 **International Brazilian Jiu-Jitsu Federation (IBJJF)** - The largest and most prestigious tournament organizer in BJJ. [IBJJF Website](https://ibjjf.com/)
-<span id="def_gi-anchor"></span>
+
 **Gi Jiu Jitsu** - In Gi Jiu Jitsu a Gi sometimes called a kimono is worn. Being a heavy-duty uniform consisting of a jacket, pants, and belts. Grabbing or gripping the gi and belt is allowed and used for performing various techniques and submissions. Gi Jiu Jitsu is the older and more traditional form of Jiu Jitsu. Often considered slower and more methodical in comparison to No-Gi due to the gripping involved and is more heavily influenced by [Judo](https://en.wikipedia.org/wiki/Judo) than No-Gi.
 
 ![~Beginning of a berimbolo sequence in a Gi competition.~](img/bjj_gi.jpg){fig-align="center" width="875"}

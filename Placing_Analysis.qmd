@@ -13,7 +13,7 @@ This page seeks to see if there are underlying trends based one what placing a c
 When we look at each individual placing, 1 through 3, in the absolute and compare it to the weight weight class of the competitor a few insights appear.
 
 1.  We see the general trend of Medium Heavy to Super Heavy being the weight classes that perform the best that we saw in our overview still holds even at the individual placing level.
-2.  More intrestingly we see taking 2nd and 3rd in the absolute have very similair breakdowns of weight classes, but for taking 1st we see a much higher proportion of competitors fall in the Heavy and particularly the Super Heavy classes, with the Medium Heavy weight class having a significant drop off. The Super Heavy and Heavy weight classes by themselves make up 50% of the 1st place winners.\
+2.  More interestingly we see taking 2nd and 3rd in the absolute have very similar breakdowns of weight classes, but for taking 1st we see a much higher proportion of competitors fall in the Heavy and particularly the Super Heavy classes, with the Medium Heavy weight class having a significant drop off. The Super Heavy and Heavy weight classes by themselves make up 50% of the 1st place winners.\
 
 ```{r}
 #| label: PlacingAnalysis_Plot_Absolute
