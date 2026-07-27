@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,16 +30,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-af936b909bca270bb724fc116a505e44.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -197,35 +196,1544 @@ ul.task-list li input[type="checkbox"] {
 
 <p>page where I do the various time series analysis.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Time_Series_Analysis_files/figure-html/TimeSeriesAnalysis_Plot_FirstPlace-1.png" class="img-fluid figure-img" width="960"></p>
-</figure>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+    Type Gender       Year Avg_Weight
+1     GI   Male 1994-01-01     222.00
+2     GI   Male 1997-01-01     215.50
+3     GI   Male 1998-01-01     201.50
+4     GI   Male 1999-01-01     208.00
+5     GI   Male 2000-01-01     208.33
+6     GI   Male 2001-01-01     190.53
+7     GI   Male 2002-01-01     222.00
+8     GI   Male 2003-01-01     217.87
+9     GI   Male 2004-01-01     208.50
+10    GI   Male 2005-01-01     212.15
+11    GI   Male 2006-01-01     191.55
+12    GI   Male 2007-01-01     215.25
+13    GI   Male 2008-01-01     201.50
+14    GI   Male 2009-01-01     211.75
+15    GI   Male 2010-01-01     204.90
+16    GI   Male 2011-01-01     204.75
+17    GI   Male 2012-01-01     215.25
+18    GI   Male 2013-01-01     229.00
+19    GI   Male 2014-01-01     225.75
+20    GI   Male 2015-01-01     215.25
+21    GI   Male 2016-01-01     218.75
+22    GI   Male 2017-01-01     218.50
+23    GI   Male 2018-01-01     215.25
+24    GI   Male 2019-01-01     215.25
+25    GI   Male 2021-01-01     222.00
+26    GI   Male 2022-01-01     225.50
+27    GI   Male 2023-01-01     232.50
+28    GI   Male 2024-01-01     229.00
+29    GI   Male 2025-01-01     229.00
+30    GI   Male 2020-01-01     222.00
+31 NO-GI   Male 2009-01-01     193.20
+32 NO-GI   Male 2010-01-01     221.50
+33 NO-GI   Male 2011-01-01     201.80
+34 NO-GI   Male 2012-01-01     195.30
+35 NO-GI   Male 2013-01-01     178.80
+36 NO-GI   Male 2014-01-01     201.90
+37 NO-GI   Male 2015-01-01     198.65
+38 NO-GI   Male 2016-01-01     205.15
+39 NO-GI   Male 2017-01-01     218.25
+40 NO-GI   Male 2018-01-01     198.55
+41 NO-GI   Male 2019-01-01     211.65
+42 NO-GI   Male 2023-01-01     211.65
+43 NO-GI   Male 2024-01-01     218.25
+44 NO-GI   Male 2022-01-01     215.00
+45 NO-GI   Male 2008-01-01     202.00
+46 NO-GI   Male 2020-01-01     215.00
+47 NO-GI   Male 2021-01-01     202.00
+48 NO-GI   Male 2007-01-01     228.00
+
+$layers
+$layers[[1]]
+geom_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+stat_smooth: na.rm = FALSE, orientation = NA, se = TRUE, method = loess
+position_identity 
+
+
+$scales
+&lt;ggproto object: Class ScalesList, gg&gt;
+    add: function
+    add_defaults: function
+    add_missing: function
+    backtransform_df: function
+    clone: function
+    find: function
+    get_scales: function
+    has_scale: function
+    input: function
+    map_df: function
+    n: function
+    non_position_scales: function
+    scales: list
+    set_palettes: function
+    train_df: function
+    transform_df: function
+    super:  &lt;ggproto object: Class ScalesList, gg&gt;
+
+$guides
+&lt;Guides[0] ggproto object&gt;
+
+&lt;empty&gt;
+
+$mapping
+$x
+&lt;quosure&gt;
+expr: ^Year
+env:  0x0000021b4904bd50
+
+$y
+&lt;quosure&gt;
+expr: ^Avg_Weight
+env:  0x0000021b4904bd50
+
+attr(,"class")
+[1] "uneval"
+
+$theme
+$theme$axis.title.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.title.y
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.text.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 1
+
+$vjust
+NULL
+
+$angle
+[1] 45
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$plot.title
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 30
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$strip.text
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 16
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+attr(,"complete")
+[1] FALSE
+attr(,"validate")
+[1] TRUE
+
+$coordinates
+&lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: TRUE
+    distance: function
+    draw_panel: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    reverse: none
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  &lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+
+$facet
+&lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+    attach_axes: function
+    attach_strips: function
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panel_content: function
+    draw_panels: function
+    finish_data: function
+    format_strip_labels: function
+    init_gtable: function
+    init_scales: function
+    map_data: function
+    params: list
+    set_panel_size: function
+    setup_data: function
+    setup_panel_params: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  &lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+
+$plot_env
+&lt;environment: 0x0000021b4904bd50&gt;
+
+$layout
+&lt;ggproto object: Class Layout, gg&gt;
+    coord: NULL
+    coord_params: list
+    facet: NULL
+    facet_params: list
+    finish_data: function
+    get_scales: function
+    layout: NULL
+    map_position: function
+    panel_params: NULL
+    panel_scales_x: NULL
+    panel_scales_y: NULL
+    render: function
+    render_labels: function
+    reset_scales: function
+    resolve_label: function
+    setup: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    train_position: function
+    super:  &lt;ggproto object: Class Layout, gg&gt;
+
+$labels
+$labels$x
+[1] "Average Weight"
+
+$labels$y
+[1] "Year"
+
+$labels$title
+[1] "Avg Weight 1st Place Medalists : Male"
+
+$labels$subtitle
+[1] "Trend over time, LOESS method."
+
+
+attr(,"class")
+[1] "gg"     "ggplot"</code></pre>
 </div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Time_Series_Analysis_files/figure-html/TimeSeriesAnalysis_Plot_FirstPlace-2.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+    Type Gender       Year Avg_Weight
+1     GI Female 1998-01-01     118.00
+2     GI Female 2000-01-01     129.00
+3     GI Female 2001-01-01     186.40
+4     GI Female 2002-01-01     141.60
+5     GI Female 2003-01-01     152.60
+6     GI Female 2004-01-01     141.60
+7     GI Female 2005-01-01     129.00
+8     GI Female 2006-01-01     129.00
+9     GI Female 2007-01-01     123.50
+10    GI Female 2008-01-01     152.60
+11    GI Female 2009-01-01     166.55
+12    GI Female 2010-01-01     156.40
+13    GI Female 2011-01-01     163.80
+14    GI Female 2012-01-01     172.15
+15    GI Female 2013-01-01     155.45
+16    GI Female 2014-01-01     148.93
+17    GI Female 2015-01-01     175.10
+18    GI Female 2016-01-01     169.30
+19    GI Female 2017-01-01     186.40
+20    GI Female 2018-01-01     171.33
+21    GI Female 2019-01-01     172.25
+22    GI Female 2021-01-01     186.40
+23    GI Female 2022-01-01     186.40
+24    GI Female 2023-01-01     186.40
+25    GI Female 2024-01-01     186.40
+26    GI Female 2025-01-01     186.40
+27    GI Female 2020-01-01     147.10
+28 NO-GI Female 2009-01-01     152.50
+29 NO-GI Female 2010-01-01     139.67
+30 NO-GI Female 2011-01-01     136.00
+31 NO-GI Female 2012-01-01     160.75
+32 NO-GI Female 2013-01-01     169.00
+33 NO-GI Female 2014-01-01     161.67
+34 NO-GI Female 2015-01-01     163.50
+35 NO-GI Female 2016-01-01     147.00
+36 NO-GI Female 2017-01-01     158.00
+37 NO-GI Female 2018-01-01     155.25
+38 NO-GI Female 2019-01-01     152.50
+39 NO-GI Female 2022-01-01     160.75
+40 NO-GI Female 2023-01-01     166.25
+41 NO-GI Female 2024-01-01     171.75
+42 NO-GI Female 2025-01-01     180.00
+43 NO-GI Female 2008-01-01     141.50
+44 NO-GI Female 2020-01-01     169.00
+45 NO-GI Female 2021-01-01     163.50
+
+$layers
+$layers[[1]]
+geom_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+stat_smooth: na.rm = FALSE, orientation = NA, se = TRUE, method = loess
+position_identity 
+
+
+$scales
+&lt;ggproto object: Class ScalesList, gg&gt;
+    add: function
+    add_defaults: function
+    add_missing: function
+    backtransform_df: function
+    clone: function
+    find: function
+    get_scales: function
+    has_scale: function
+    input: function
+    map_df: function
+    n: function
+    non_position_scales: function
+    scales: list
+    set_palettes: function
+    train_df: function
+    transform_df: function
+    super:  &lt;ggproto object: Class ScalesList, gg&gt;
+
+$guides
+&lt;Guides[0] ggproto object&gt;
+
+&lt;empty&gt;
+
+$mapping
+$x
+&lt;quosure&gt;
+expr: ^Year
+env:  0x0000021b48815a50
+
+$y
+&lt;quosure&gt;
+expr: ^Avg_Weight
+env:  0x0000021b48815a50
+
+attr(,"class")
+[1] "uneval"
+
+$theme
+$theme$axis.title.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.title.y
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.text.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 1
+
+$vjust
+NULL
+
+$angle
+[1] 45
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$plot.title
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 30
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$strip.text
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 16
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+attr(,"complete")
+[1] FALSE
+attr(,"validate")
+[1] TRUE
+
+$coordinates
+&lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: TRUE
+    distance: function
+    draw_panel: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    reverse: none
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  &lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+
+$facet
+&lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+    attach_axes: function
+    attach_strips: function
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panel_content: function
+    draw_panels: function
+    finish_data: function
+    format_strip_labels: function
+    init_gtable: function
+    init_scales: function
+    map_data: function
+    params: list
+    set_panel_size: function
+    setup_data: function
+    setup_panel_params: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  &lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+
+$plot_env
+&lt;environment: 0x0000021b48815a50&gt;
+
+$layout
+&lt;ggproto object: Class Layout, gg&gt;
+    coord: NULL
+    coord_params: list
+    facet: NULL
+    facet_params: list
+    finish_data: function
+    get_scales: function
+    layout: NULL
+    map_position: function
+    panel_params: NULL
+    panel_scales_x: NULL
+    panel_scales_y: NULL
+    render: function
+    render_labels: function
+    reset_scales: function
+    resolve_label: function
+    setup: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    train_position: function
+    super:  &lt;ggproto object: Class Layout, gg&gt;
+
+$labels
+$labels$x
+[1] "Average Weight"
+
+$labels$y
+[1] "Year"
+
+$labels$title
+[1] "Avg Weight 1st Place Medalists : Female"
+
+$labels$subtitle
+[1] "Trend over time, LOESS method."
+
+
+attr(,"class")
+[1] "gg"     "ggplot"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Time_Series_Analysis_files/figure-html/TimeSeriesAnalysis_Plot_TwoThreePlace-1.png" class="img-fluid figure-img" width="960"></p>
-</figure>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+    Type Gender       Year Avg_Weight
+1     GI   Male 1994-01-01     195.00
+2     GI   Male 1996-01-01     211.32
+3     GI   Male 1997-01-01     191.98
+4     GI   Male 1998-01-01     206.66
+5     GI   Male 1999-01-01     222.20
+6     GI   Male 2000-01-01     205.51
+7     GI   Male 2001-01-01     210.07
+8     GI   Male 2002-01-01     212.29
+9     GI   Male 2003-01-01     216.11
+10    GI   Male 2004-01-01     189.43
+11    GI   Male 2005-01-01     203.80
+12    GI   Male 2006-01-01     203.58
+13    GI   Male 2007-01-01     214.45
+14    GI   Male 2008-01-01     213.10
+15    GI   Male 2009-01-01     207.33
+16    GI   Male 2010-01-01     218.36
+17    GI   Male 2011-01-01     208.38
+18    GI   Male 2012-01-01     213.02
+19    GI   Male 2013-01-01     216.38
+20    GI   Male 2014-01-01     203.88
+21    GI   Male 2015-01-01     214.27
+22    GI   Male 2016-01-01     214.17
+23    GI   Male 2017-01-01     215.30
+24    GI   Male 2018-01-01     217.68
+25    GI   Male 2019-01-01     208.42
+26    GI   Male 2021-01-01     212.14
+27    GI   Male 2022-01-01     222.10
+28    GI   Male 2023-01-01     220.92
+29    GI   Male 2024-01-01     206.11
+30    GI   Male 2025-01-01     223.25
+31    GI   Male 2020-01-01     217.50
+32 NO-GI   Male 2009-01-01     195.30
+33 NO-GI   Male 2010-01-01     190.35
+34 NO-GI   Male 2011-01-01     197.47
+35 NO-GI   Male 2012-01-01     195.91
+36 NO-GI   Male 2013-01-01     188.77
+37 NO-GI   Male 2014-01-01     195.22
+38 NO-GI   Male 2015-01-01     187.47
+39 NO-GI   Male 2016-01-01     189.82
+40 NO-GI   Male 2017-01-01     192.29
+41 NO-GI   Male 2018-01-01     211.38
+42 NO-GI   Male 2019-01-01     207.84
+43 NO-GI   Male 2022-01-01     209.68
+44 NO-GI   Male 2023-01-01     211.72
+45 NO-GI   Male 2024-01-01     200.36
+46 NO-GI   Male 2025-01-01     188.60
+47 NO-GI   Male 2008-01-01     209.72
+48 NO-GI   Male 2020-01-01     188.80
+49 NO-GI   Male 2021-01-01     199.24
+50 NO-GI   Male 2007-01-01     197.53
+
+$layers
+$layers[[1]]
+geom_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+stat_smooth: na.rm = FALSE, orientation = NA, se = TRUE, method = loess
+position_identity 
+
+
+$scales
+&lt;ggproto object: Class ScalesList, gg&gt;
+    add: function
+    add_defaults: function
+    add_missing: function
+    backtransform_df: function
+    clone: function
+    find: function
+    get_scales: function
+    has_scale: function
+    input: function
+    map_df: function
+    n: function
+    non_position_scales: function
+    scales: list
+    set_palettes: function
+    train_df: function
+    transform_df: function
+    super:  &lt;ggproto object: Class ScalesList, gg&gt;
+
+$guides
+&lt;Guides[0] ggproto object&gt;
+
+&lt;empty&gt;
+
+$mapping
+$x
+&lt;quosure&gt;
+expr: ^Year
+env:  0x0000021b4c957148
+
+$y
+&lt;quosure&gt;
+expr: ^Avg_Weight
+env:  0x0000021b4c957148
+
+attr(,"class")
+[1] "uneval"
+
+$theme
+$theme$axis.title.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.title.y
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.text.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 1
+
+$vjust
+NULL
+
+$angle
+[1] 45
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$plot.title
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 30
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$strip.text
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 16
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+attr(,"complete")
+[1] FALSE
+attr(,"validate")
+[1] TRUE
+
+$coordinates
+&lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: TRUE
+    distance: function
+    draw_panel: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    reverse: none
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  &lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+
+$facet
+&lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+    attach_axes: function
+    attach_strips: function
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panel_content: function
+    draw_panels: function
+    finish_data: function
+    format_strip_labels: function
+    init_gtable: function
+    init_scales: function
+    map_data: function
+    params: list
+    set_panel_size: function
+    setup_data: function
+    setup_panel_params: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  &lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+
+$plot_env
+&lt;environment: 0x0000021b4c957148&gt;
+
+$layout
+&lt;ggproto object: Class Layout, gg&gt;
+    coord: NULL
+    coord_params: list
+    facet: NULL
+    facet_params: list
+    finish_data: function
+    get_scales: function
+    layout: NULL
+    map_position: function
+    panel_params: NULL
+    panel_scales_x: NULL
+    panel_scales_y: NULL
+    render: function
+    render_labels: function
+    reset_scales: function
+    resolve_label: function
+    setup: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    train_position: function
+    super:  &lt;ggproto object: Class Layout, gg&gt;
+
+$labels
+$labels$x
+[1] "Average Weight"
+
+$labels$y
+[1] "Year"
+
+$labels$title
+[1] "Avg Weight 2nd &amp; 3rd Place Medalists : Male"
+
+$labels$subtitle
+[1] "Trend over time, LOESS method."
+
+
+attr(,"class")
+[1] "gg"     "ggplot"</code></pre>
 </div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Time_Series_Analysis_files/figure-html/TimeSeriesAnalysis_Plot_TwoThreePlace-2.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+    Type Gender       Year Avg_Weight
+1     GI Female 2002-01-01     146.30
+2     GI Female 2003-01-01     135.30
+3     GI Female 2004-01-01     129.00
+4     GI Female 2005-01-01     169.50
+5     GI Female 2006-01-01     123.50
+6     GI Female 2007-01-01     146.40
+7     GI Female 2008-01-01     146.70
+8     GI Female 2009-01-01     152.33
+9     GI Female 2010-01-01     151.42
+10    GI Female 2011-01-01     153.58
+11    GI Female 2012-01-01     159.15
+12    GI Female 2013-01-01     149.45
+13    GI Female 2014-01-01     153.22
+14    GI Female 2015-01-01     152.33
+15    GI Female 2016-01-01     152.16
+16    GI Female 2017-01-01     154.37
+17    GI Female 2018-01-01     159.90
+18    GI Female 2019-01-01     160.75
+19    GI Female 2021-01-01     167.44
+20    GI Female 2022-01-01     165.57
+21    GI Female 2023-01-01     160.92
+22    GI Female 2024-01-01     173.17
+23    GI Female 2025-01-01     173.17
+24    GI Female 2020-01-01     152.20
+25 NO-GI Female 2009-01-01     155.80
+26 NO-GI Female 2010-01-01     145.43
+27 NO-GI Female 2011-01-01     139.67
+28 NO-GI Female 2012-01-01     140.40
+29 NO-GI Female 2013-01-01     155.25
+30 NO-GI Female 2014-01-01     151.12
+31 NO-GI Female 2015-01-01     142.11
+32 NO-GI Female 2017-01-01     142.60
+33 NO-GI Female 2018-01-01     145.78
+34 NO-GI Female 2019-01-01     154.33
+35 NO-GI Female 2022-01-01     161.30
+36 NO-GI Female 2023-01-01     158.92
+37 NO-GI Female 2024-01-01     151.58
+38 NO-GI Female 2025-01-01     158.00
+39 NO-GI Female 2008-01-01     154.33
+40 NO-GI Female 2016-01-01     158.00
+41 NO-GI Female 2020-01-01     139.67
+42 NO-GI Female 2021-01-01     163.50
+
+$layers
+$layers[[1]]
+geom_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+stat_smooth: na.rm = FALSE, orientation = NA, se = TRUE, method = loess
+position_identity 
+
+
+$scales
+&lt;ggproto object: Class ScalesList, gg&gt;
+    add: function
+    add_defaults: function
+    add_missing: function
+    backtransform_df: function
+    clone: function
+    find: function
+    get_scales: function
+    has_scale: function
+    input: function
+    map_df: function
+    n: function
+    non_position_scales: function
+    scales: list
+    set_palettes: function
+    train_df: function
+    transform_df: function
+    super:  &lt;ggproto object: Class ScalesList, gg&gt;
+
+$guides
+&lt;Guides[0] ggproto object&gt;
+
+&lt;empty&gt;
+
+$mapping
+$x
+&lt;quosure&gt;
+expr: ^Year
+env:  0x0000021b4d28f610
+
+$y
+&lt;quosure&gt;
+expr: ^Avg_Weight
+env:  0x0000021b4d28f610
+
+attr(,"class")
+[1] "uneval"
+
+$theme
+$theme$axis.title.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.title.y
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 15
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$axis.text.x
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 1
+
+$vjust
+NULL
+
+$angle
+[1] 45
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$plot.title
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 30
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$theme$strip.text
+$family
+NULL
+
+$face
+[1] "bold"
+
+$colour
+NULL
+
+$size
+[1] 16
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] FALSE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+attr(,"complete")
+[1] FALSE
+attr(,"validate")
+[1] TRUE
+
+$coordinates
+&lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: TRUE
+    distance: function
+    draw_panel: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    reverse: none
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  &lt;ggproto object: Class CoordCartesian, Coord, gg&gt;
+
+$facet
+&lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+    attach_axes: function
+    attach_strips: function
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panel_content: function
+    draw_panels: function
+    finish_data: function
+    format_strip_labels: function
+    init_gtable: function
+    init_scales: function
+    map_data: function
+    params: list
+    set_panel_size: function
+    setup_data: function
+    setup_panel_params: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  &lt;ggproto object: Class FacetWrap, Facet, gg&gt;
+
+$plot_env
+&lt;environment: 0x0000021b4d28f610&gt;
+
+$layout
+&lt;ggproto object: Class Layout, gg&gt;
+    coord: NULL
+    coord_params: list
+    facet: NULL
+    facet_params: list
+    finish_data: function
+    get_scales: function
+    layout: NULL
+    map_position: function
+    panel_params: NULL
+    panel_scales_x: NULL
+    panel_scales_y: NULL
+    render: function
+    render_labels: function
+    reset_scales: function
+    resolve_label: function
+    setup: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    train_position: function
+    super:  &lt;ggproto object: Class Layout, gg&gt;
+
+$labels
+$labels$x
+[1] "Average Weight"
+
+$labels$y
+[1] "Year"
+
+$labels$title
+[1] "Avg Weight 2nd &amp; 3rd Place Medalists : Female"
+
+$labels$subtitle
+[1] "Trend over time, LOESS method."
+
+
+attr(,"class")
+[1] "gg"     "ggplot"</code></pre>
 </div>
 </div>
 
@@ -233,242 +1741,239 @@ ul.task-list li input[type="checkbox"] {
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
       }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
-        }
-        return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
         }
       }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
     }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
     }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
       } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
         }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
       }
     }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
           }
         } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
+          // See if we can fetch this
+          fetch(url.split('#')[0])
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
+            const note = htmlDoc.getElementById(id);
             if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
+              const html = processXRef(id, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -476,161 +1981,185 @@ ul.task-list li input[type="checkbox"] {
             instance.show();
           });
         }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
       } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
         });
       }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
     }
-  });
-  </script>
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
 </div> <!-- /content -->
 
 
