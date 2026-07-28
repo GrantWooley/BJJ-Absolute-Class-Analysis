@@ -2,17 +2,11 @@
 #and two separate web scraping functions for scraping both the old and new HTML
 #format of the IBJJF results web pages.
 
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
+
 import pandas as pd
 import numpy as np
 
-#Function to open URL and get beautiful soup object. Defining this function separately to allow
-#error handling of the URLs on the IBJFF Results page that are dead links.
-def GetSoup(URL):
-    Soup = urlopen(URL)
-    Soup = BeautifulSoup(Soup,"html.parser")
-    return Soup
+
 
 
 
