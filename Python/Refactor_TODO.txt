@@ -1,0 +1,6 @@
+As I start refactor of Webscraper create new branch and practice making a PR.
+ Add requirement.txt file for python.
+ When refactoring python, make sure it matches PEP 8.
+ Add if name = __main__ to python file.
+ Using PyHere
+Resolve issue with Python not being able to import scraper functions.
