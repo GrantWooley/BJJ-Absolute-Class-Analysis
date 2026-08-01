@@ -34,11 +34,11 @@ def LegacyScrape(Soup):
 #Accepts Beautiful Soup object as Argument.
 def ModernScrape(Soup):
 
-    #Splitout Athlete Results
-    AthleteResults = Soup.find("div", class_ = "col-xs-12 col-md-6 col-athlete")
+    #Pull out  HTML that includes all athlete result data, excludes Academy Results data.
+    athlete_results = Soup.find("div", class_ = "col-xs-12 col-md-6 col-athlete")
 
     #Splitting Out Tags that contain categories.
-    Categories =  AthleteResults.find_all("h4", class_ = "subtitle")
+    division_categories =  athlete_results.find_all("h4", class_ = "subtitle")
 
     #Scrape through Categories tags. Pulling out Division string and splitting the strings properly
     #into age, belt, gender, weight
@@ -47,9 +47,9 @@ def ModernScrape(Soup):
     Headers = []
 
     #Loop through each category
-    for Category in Categories:
+    for category in division_categories:
         #Pull the categories Contents, which contains Age, Gender, Belt, and Weights
-        Contents = Category.contents
+        Contents = category.contents
         #Contents contain category info in multiple formats. Pulling the best format.
         Contents = Contents[1]
         #Strings need to be split, and then stripped of line returns one at a time before being placed
@@ -78,7 +78,7 @@ def ModernScrape(Soup):
 
 
     #Getting All List tags
-    ListTags = AthleteResults.find_all("div", class_ = "list")
+    ListTags = athlete_results.find_all("div", class_ = "list")
     #Loop through each list tag
     for ListT in ListTags:
         #Pull Out Athlete Item tags
