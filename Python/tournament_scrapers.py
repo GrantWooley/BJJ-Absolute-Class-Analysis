@@ -7,9 +7,6 @@ import pandas as pd
 import numpy as np
 
 
-
-
-
 #Function for Scraping older HTML format of IBJFF pages. From roughly the year 2012 and before.
 #Accepts Beautiful Soup object as Argument.
 def LegacyScrape(Soup):
@@ -32,35 +29,7 @@ def LegacyScrape(Soup):
 
     return df
 
-
 #FIXME Time to start refactor of second scraping function.
-def parse_division_categories(athelete_results):
-    # Parse through athlete results data. Pulling out division header info: age, belt, gender, weight.
-    # Returning all division headers.
-    # I.e. adult, blue, male, middle
-    #      adult, blue, male, heavy
-
-
-    #Grab category tags that contain division info.
-    category_tags = athelete_results.find_all("div", class_ ="category mt-4 mb-3")
-
-    divisions = []
-    for category in category_tags:
-        #One web page was missing a string attribute for a div tag.
-        #If this happens insert a dummy header, as to not negatively affect ordering of finals dataframe results.
-        #Should not affect final df. If it does this is handled in data cleaning.
-        if category.string == None:
-            dummycategory = ['dummy1','dummy2','dummy3','dummy4']
-            divisions.append(dummycategory)
-            continue
-
-        #Split the category tag into Age, Belt, Gender, Weight
-        category = category.string.split(" / ")
-        divisions.append(category)
-
-    return divisions
-
-
 #Function for scraping newer HTML format of IBJJF results pages. Roughly 2012 onward.
 #Accepts Beautiful Soup object as Argument.
 def ModernScrape(Soup):
@@ -191,27 +160,82 @@ def ModernScrape(Soup):
     df = df.reset_index(drop = True)
     return df
 
-def create_standard_tournament_df(rows_of_data):
-    df = pd.DataFrame(rows_of_data, columns=['Age','Belt','Gender','Weight Class','Placing','Competitor Name','Academy Name'])
-    return df
+def parse_division_categories(athelete_results):
+    # Parse through athlete results data. Pulling out division header info: age, belt, gender, weight.
+    # Returning all division headers.
+    # I.e. adult, blue, male, middle
+    #      adult, blue, male, heavy
 
-def filter_to_blackbelt_adult(df):
-    # Analysis is for top level competition. Black Belt, Adult
-    
-    # Use contains instead of exact match as Female Divisions in early tournament years were combined belts.
-    # I.E. Brown Black, Purple Brown Black categories.
-    # Some tournament results are stored in Portuguese. Filter for both English & Portuguese.
-    df = df[(df['Belt'].str.contains('Black', na = False)) | (df['Belt'].str.contains('Preta', na = False))]
-    
-    #On one web page, Adult is misspelled as Asult. Filtering for this page and correcting these records.
-    df = df[(df['Age'] == 'Adult') | (df['Age'] == 'Adulto') | (df['Age'] == 'Asult')]
-    df['Age'] = np.where(df['Age']== 'Asult', 'Adult', df['Age'])
-    
-    return df
+    #Grab category tags that contain division info.
+    category_tags = athelete_results.find_all("div", class_ ="category mt-4 mb-3")
 
+    divisions = []
+    for category in category_tags:
+        #One web page was missing a string attribute for a div tag.
+        #If this happens insert a dummy header, as to not negatively affect ordering of finals dataframe results.
+        #Should not affect final df. If it does this is handled in data cleaning.
+        if category.string is None:
+            dummycategory = ['dummy1','dummy2','dummy3','dummy4']
+            divisions.append(dummycategory)
+            continue
+
+        #Split the category tag into Age, Belt, Gender, Weight
+        category = category.string.split(" / ")
+        divisions.append(category)
+
+    return divisions
+
+def collect_page_results(athelete_results):
+    # Pull out table objects from web page, and parse through them collecting resutls information.
+
+    # Grab Tags that contain Tbodies aka tables.
+    result_tables = athelete_results.find_all("tbody")
+
+    #List to Store Placing information. Placing, Athlete Name, and Academy Name.
+    results = []
+
+    for tag in result_tables:
+        #Pull Out td children tags containing Placing, Athlete Name, and Academy Name.
+        td_tags = tag.find_all("td")
+        individual_table_results = collect_individual_table_results(td_tags)
+
+        results.append(individual_table_results)
+
+    return results
+
+def collect_individual_table_results(td_tags):
+    #Colles all rows of an individual tournament results table object.
+
+    individual_table = []
+
+    #Go through tags collecting each row of Placing, Athlete Name, and Academy Name in table object.
+    for tag in td_tags:
+
+        #Access td tags class.
+        td_tag_class = tag['class'][0]
+
+        #Store Placing information.
+        if td_tag_class == 'place':
+            # Some web pages have errors where no placing was recorded.
+            # Returns none. Convert to string to prevent errors in later code.
+            individual_table.append(str(tag.string))
+
+        #If the tag is an athlete academy tag, parse the html tree further to get athlete name and academy.
+        elif td_tag_class == 'athlete-academy':
+
+            div_tags = tag.find_all("div")
+
+            #Collect and Store Athlete Name and Academy Name information.
+            for div in div_tags:
+                #Some Athletes do not have an affiliated academy, in those instances you get a return of none,
+                #converting to string data type to prevent error.
+                individual_table.append(str(div.string))
+
+    return individual_table
 
 def build_rows_of_data(division_categories, results):
-    #Go through both our division categories and results. Combining them into full rows of data for final dataframe creation.
+    #Go through both our division categories and results.
+    #Combining them into full rows of data for final dataframe creation.
 
     full_rows = []
 
@@ -247,59 +271,25 @@ def build_rows_of_data(division_categories, results):
 
     return full_rows
 
+def create_standard_tournament_df(rows_of_data):
+    df = pd.DataFrame(rows_of_data,
+                      columns=['Age','Belt','Gender','Weight Class','Placing','Competitor Name','Academy Name']
+                      )
+    return df
 
-def collect_page_results(athelete_results):
-    # Pull out table objects from web page, and parse through them collecting resutls information.
-
-    # Grab Tags that contain Tbodies aka tables.
-    result_tables = athelete_results.find_all("tbody")
-
-    #List to Store Placing information. Placing, Athlete Name, and Academy Name.
-    results = []
-
-    for tag in result_tables:
-        #Pull Out td children tags containing Placing, Athlete Name, and Academy Name.
-        td_tags = tag.find_all("td")
-        individual_table_results = collect_individual_table_results(td_tags)
-
-        results.append(individual_table_results)
-
-    return results
-
-
-
-
-def collect_individual_table_results(td_tags):
-    #Colles all rows of an individual tournament results table object.
-
-    individual_table = []
-
-    #Go through tags collecting each row of Placing, Athlete Name, and Academy Name in table object.
-    for tag in td_tags:
-
-        #Access td tags class.
-        td_tag_class = tag['class'][0]
-
-        #Store Placing information.
-        if td_tag_class == 'place':
-            # Some web pages have errors where no placing was recorded.
-            # Returns none. Convert to string to prevent errors in later code.
-            individual_table.append(str(tag.string))
-
-        #If the tag is an athlete academy tag, parse the html tree further to get athlete name and academy.
-        elif td_tag_class == 'athlete-academy':
-
-            div_tags = tag.find_all("div")
-
-            #Collect and Store Athlete Name and Academy Name information.
-            for div in div_tags:
-                #Some Athletes do not have an affiliated academy, in those instances you get a return of none,
-                #converting to string data type to prevent error.
-                individual_table.append(str(div.string))
-
-
-    return individual_table
-
+def filter_to_blackbelt_adult(df):
+    # Analysis is for top level competition. Black Belt, Adult
+    
+    # Use contains instead of exact match as Female Divisions in early tournament years were combined belts.
+    # I.E. Brown Black, Purple Brown Black categories.
+    # Some tournament results are stored in Portuguese. Filter for both English & Portuguese.
+    df = df[(df['Belt'].str.contains('Black', na = False)) | (df['Belt'].str.contains('Preta', na = False))]
+    
+    #On one web page, Adult is misspelled as Asult. Filtering for this page and correcting these records.
+    df = df[(df['Age'] == 'Adult') | (df['Age'] == 'Adulto') | (df['Age'] == 'Asult')]
+    df['Age'] = np.where(df['Age'] == 'Asult', 'Adult', df['Age'])
+    
+    return df
 
 def get_tournament_name(Soup):
     #Using the title element of the Soup to get the tournament name.
