@@ -11,12 +11,12 @@ import numpy as np
 #Accepts Beautiful Soup object as Argument.
 def LegacyScrape(Soup):
     #Pull out  HTML that includes all athlete result data, excludes Academy Results data.
-    athelete_results = Soup.find("div", class_ = "col-sm-12 athletes")
+    athlete_results = Soup.find("div", class_ = "col-sm-12 athletes")
 
     #Get Division Information. I.e. adult, blue, male, middle
-    division_categories = parse_division_categories(athelete_results)
+    division_categories = parse_division_categories(athlete_results)
     #Get Placing information. I.e. Placing, Athlete Name, and Academy Name.
-    results = collect_page_results(athelete_results)
+    results = collect_page_results(athlete_results)
 
     #FIXME Shared across both functions Will need to implement this same approach in second scraper.
     full_rows = build_rows_of_data(division_categories, results)
@@ -42,7 +42,7 @@ def ModernScrape(Soup):
 
     #Scrape through Categories tags. Pulling out Division string and splitting the strings properly
     #into age, belt, gender, weight
-    #Declare a list to store Categories into. I.E. One instance of Age, Belt, Gender, Weight 
+    #Declare a list to store Categories into. I.E. One instance of Age, Belt, Gender, Weight
     # Is one category.
     Headers = []
 
@@ -62,13 +62,13 @@ def ModernScrape(Soup):
             Sublist.append(x.strip())
         #Appending cleaned category to Headers list
         Headers.append(Sublist)
-        
 
 
-    #Splitting Out div Tags that contain lists. These list tags contain the table like objects that include Placing, Athlete Name, Athlete Academy. 
+
+    #Splitting Out div Tags that contain lists. These list tags contain the table like objects that include Placing, Athlete Name, Athlete Academy.
     #They have children div tags with class athlete-item. One for each competitor result.
     #Athelte item div tags contain two children div tags:
-    #1.Class = position-athlete contains placing. 
+    #1.Class = position-athlete contains placing.
     #2.Class = name contains two elements: Athlete Name, Academy name. Which are stored under P and Span children tags.
 
     #Declare List to Store Placing information. Placings, Athlete Names, and Academy Names.
@@ -160,14 +160,14 @@ def ModernScrape(Soup):
     df = df.reset_index(drop = True)
     return df
 
-def parse_division_categories(athelete_results):
+def parse_division_categories(athlete_results):
     # Parse through athlete results data. Pulling out division header info: age, belt, gender, weight.
     # Returning all division headers.
     # I.e. adult, blue, male, middle
     #      adult, blue, male, heavy
 
     #Grab category tags that contain division info.
-    category_tags = athelete_results.find_all("div", class_ ="category mt-4 mb-3")
+    category_tags = athlete_results.find_all("div", class_ ="category mt-4 mb-3")
 
     divisions = []
     for category in category_tags:
@@ -185,11 +185,11 @@ def parse_division_categories(athelete_results):
 
     return divisions
 
-def collect_page_results(athelete_results):
+def collect_page_results(athlete_results):
     # Pull out table objects from web page, and parse through them collecting resutls information.
 
     # Grab Tags that contain Tbodies aka tables.
-    result_tables = athelete_results.find_all("tbody")
+    result_tables = athlete_results.find_all("tbody")
 
     #List to Store Placing information. Placing, Athlete Name, and Academy Name.
     results = []
