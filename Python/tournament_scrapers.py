@@ -116,14 +116,6 @@ def ModernScrape(Soup):
         x += 1
 
 
-    print(df.sample(5))
-    #issue is our Belt is getting assigned as adult/male
-    print(df['Belt'].drop_duplicates())
-    print(df['Age'].drop_duplicates())
-    print()
-    #looks like I'm losing age somehwere here.
-
-
     df = filter_to_blackbelt_adult(df)
 
 
@@ -241,6 +233,7 @@ def build_rows_of_data(division_categories, results):
         #Remove the elements out of the results split list until the results split list has nothing left in it.
         while len(results_split) != 0:
 
+            #Make this dic
             new_row = []
 
             current_category = division_categories[x]
@@ -303,7 +296,7 @@ def get_tournament_year(Soup):
 
 #FIXME new functios I added while refactoring modern scrape.
 def parse_modern_division_categories(athlete_results):
-    # Parse through modern webpage athlete results data.
+    # Parse through legacy webpage athlete results data.
     # Pulling out division header info: age, belt, gender, weight.
     # Returning all division headers.
     # I.e. adult, blue, male, middle
@@ -321,10 +314,24 @@ def parse_modern_division_categories(athlete_results):
         category_contents = category.contents
         category_contents = category_contents[1]
 
-        #Strings need to be split, and then stripped of line returns to get a clean division list.
+        #Strings need to be split, reordered, and then stripped of line returns to get a clean division list.
         category_contents = category_contents.split("/")
+        category_contents = reorder_modern_division_category(category_contents)
         category_contents = [content.strip() for content in category_contents]
 
         divisions.append(category_contents)
 
     return divisions
+
+
+def reorder_modern_division_category(category_contents):
+    # Reorder contents of the category so it matches the order used in the legacy web pages.
+    # I.e. Change order of Age, Gender, Belt, Weight Class to Age, Belt, Gender, Weight Class
+    # Allows for reuse of more functions across both web page formats.
+
+    gender = category_contents[1]
+    belt = category_contents[2]
+    category_contents[1] = belt
+    category_contents[2] = gender
+
+    return category_contents
