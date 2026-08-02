@@ -14,7 +14,7 @@ def LegacyScrape(Soup):
     athlete_results = Soup.find("div", class_ = "col-sm-12 athletes")
 
     #Get Division Information. I.e. adult, blue, male, middle
-    division_categories = parse_division_categories(athlete_results)
+    division_categories = parse_legacy_division_categories(athlete_results)
     #Get Placing information. I.e. Placing, Athlete Name, and Academy Name.
     results = collect_page_results(athlete_results)
 
@@ -37,32 +37,7 @@ def ModernScrape(Soup):
     #Pull out  HTML that includes all athlete result data, excludes Academy Results data.
     athlete_results = Soup.find("div", class_ = "col-xs-12 col-md-6 col-athlete")
 
-    #Splitting Out Tags that contain categories.
-    division_categories =  athlete_results.find_all("h4", class_ = "subtitle")
-
-    #Scrape through Categories tags. Pulling out Division string and splitting the strings properly
-    #into age, belt, gender, weight
-    #Declare a list to store Categories into. I.E. One instance of Age, Belt, Gender, Weight
-    # Is one category.
-    Headers = []
-
-    #Loop through each category
-    for category in division_categories:
-        #Pull the categories Contents, which contains Age, Gender, Belt, and Weights
-        Contents = category.contents
-        #Contents contain category info in multiple formats. Pulling the best format.
-        Contents = Contents[1]
-        #Strings need to be split, and then stripped of line returns one at a time before being placed
-        #into the headers list.
-        Contents = Contents.split("/")
-        #Declaring Sublist
-        Sublist =[]
-        #Stripping each string of whitespace and adding to sublist.
-        for x in Contents:
-            Sublist.append(x.strip())
-        #Appending cleaned category to Headers list
-        Headers.append(Sublist)
-
+    division_categories = parse_modern_division_categories(athlete_results)
 
 
     #Splitting Out div Tags that contain lists. These list tags contain the table like objects that include Placing, Athlete Name, Athlete Academy.
@@ -111,35 +86,47 @@ def ModernScrape(Soup):
     # df = create_standard_tournament_df()
     df = pd.DataFrame( columns=['Age','Belt','Gender','Weight Class','Placing','Competitor Name','Academy Name'])
 
+
+
     #FIXME Shared across both functions
     # will use build rows functions but need to refactor earlier sections of code first.
     # full_rows = build_rows_of_data(division_categories, results)
     #Looping through the two lists that contain data. Accessing them to build one row of data at a time and
     #adding it to the data frame.
     x = 0
-    while x < len(Headers):
-        #Access results list at the same position we are accessing headers list and store in a variable.
+    #FIXME Two webpage formats are not actually in the same order. Make change where I use dictionaries instead of lists. HERE
+    while x < len(division_categories):
+        #Access results list at the same position we are accessing divisions list and store in a variable.
         ResultsSplit = Results[x]
         #A list object im getting from the Results array can be anywhere from 2 competitors to 4, but a result will always include 3 elements: Placing, Name, Academy Name.
-        #So I am accessing the first 3 elements of the Results Split list. Adding them to my new row, 
+        #So I am accessing the first 3 elements of the Results Split list. Adding them to my new row,
         #and then taking them out of the ResultsSplit list until the results split list has nothing left in it.
         while len(ResultsSplit) != 0:
             NewRow = []
-            NewHeader = Headers[x]
+            NewHeader = division_categories[x]
             for Header in NewHeader:
                 #Some strings have white spaces. Stripping strings before storing.
-                NewRow.append(Header.strip()) 
-            IndiviualResult = ResultsSplit[0:3]    
+                NewRow.append(Header.strip())
+            IndiviualResult = ResultsSplit[0:3]
             for Result in IndiviualResult:
                 NewRow.append(Result.strip())
             df.loc[len(df)] = NewRow
             del ResultsSplit[0:3]
-            
+
         x += 1
 
 
+    print(df.sample(5))
+    #issue is our Belt is getting assigned as adult/male
+    print(df['Belt'].drop_duplicates())
+    print(df['Age'].drop_duplicates())
+    print()
+    #looks like I'm losing age somehwere here.
+
 
     df = filter_to_blackbelt_adult(df)
+
+
 
     #Getting the title that contains both tournament name and year.
     Title = Soup.find_all("h2",class_ = "title")
@@ -157,11 +144,14 @@ def ModernScrape(Soup):
     df['Tournament'] = Tournament
 
 
+
+
     df = df.reset_index(drop = True)
     return df
 
-def parse_division_categories(athlete_results):
-    # Parse through athlete results data. Pulling out division header info: age, belt, gender, weight.
+def parse_legacy_division_categories(athlete_results):
+    # Parse through legacy webpage athlete results data.
+    # Pulling out division header info: age, belt, gender, weight.
     # Returning all division headers.
     # I.e. adult, blue, male, middle
     #      adult, blue, male, heavy
@@ -278,6 +268,7 @@ def create_standard_tournament_df(rows_of_data):
     return df
 
 def filter_to_blackbelt_adult(df):
+
     # Analysis is for top level competition. Black Belt, Adult
     
     # Use contains instead of exact match as Female Divisions in early tournament years were combined belts.
@@ -308,3 +299,32 @@ def get_tournament_year(Soup):
     tournament_year = tournament_year[-3]
     return tournament_year
 
+
+
+#FIXME new functios I added while refactoring modern scrape.
+def parse_modern_division_categories(athlete_results):
+    # Parse through modern webpage athlete results data.
+    # Pulling out division header info: age, belt, gender, weight.
+    # Returning all division headers.
+    # I.e. adult, blue, male, middle
+    #      adult, blue, male, heavy
+
+    #Grab tags that contain division info.
+    category_tags =  athlete_results.find_all("h4", class_ = "subtitle")
+
+    divisions = []
+
+    for category in category_tags:
+
+        #Cateogry contents contain age, belt, gender, weight.
+        #Contents contain category info in multiple formats. Pull the best format.
+        category_contents = category.contents
+        category_contents = category_contents[1]
+
+        #Strings need to be split, and then stripped of line returns to get a clean division list.
+        category_contents = category_contents.split("/")
+        category_contents = [content.strip() for content in category_contents]
+
+        divisions.append(category_contents)
+
+    return divisions
