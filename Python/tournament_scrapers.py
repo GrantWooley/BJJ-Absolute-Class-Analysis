@@ -7,141 +7,53 @@ import pandas as pd
 import numpy as np
 
 
-#Function for Scraping older HTML format of IBJFF pages. From roughly the year 2012 and before.
-#Accepts Beautiful Soup object as Argument.
-def LegacyScrape(Soup):
+def scrape_legacy_web_page(Soup):
+    #Function for Scraping older HTML format of IBJFF pages. From roughly the year 2012 and before.
+    
     #Pull out  HTML that includes all athlete result data, excludes Academy Results data.
     athlete_results = Soup.find("div", class_ = "col-sm-12 athletes")
 
     #Get Division Information. I.e. adult, blue, male, middle
-    division_categories = parse_legacy_division_categories(athlete_results)
+    division_categories = collect_legacy_division_categories(athlete_results)
     #Get Placing information. I.e. Placing, Athlete Name, and Academy Name.
-    results = collect_page_results(athlete_results)
+    results = collect_legacy_page_results(athlete_results)
 
-    #FIXME Shared across both functions Will need to implement this same approach in second scraper.
     full_rows = build_rows_of_data(division_categories, results)
     df = create_standard_tournament_df(full_rows)
 
     df = filter_to_blackbelt_adult(df)
-    df['Tournament'] = get_tournament_name(Soup)
-    df['Year'] = get_tournament_year(Soup)
+    df['Tournament'] = get_legacy_tournament_name(Soup)
+    df['Year'] = get_legacy_tournament_year(Soup)
     df = df.reset_index(drop = True)
 
     return df
 
-#FIXME Time to start refactor of second scraping function.
-#Function for scraping newer HTML format of IBJJF results pages. Roughly 2012 onward.
-#Accepts Beautiful Soup object as Argument.
-def ModernScrape(Soup):
-
+def scrape_modern_web_page(Soup):
+    #Function for scraping newer HTML format of IBJJF results pages. Roughly 2012 onward.
+    
     #Pull out  HTML that includes all athlete result data, excludes Academy Results data.
     athlete_results = Soup.find("div", class_ = "col-xs-12 col-md-6 col-athlete")
 
-    division_categories = parse_modern_division_categories(athlete_results)
+    #Get Division Information. I.e. adult, blue, male, middle
+    division_categories = collect_modern_division_categories(athlete_results)
+    #Get Placing information. I.e. Placing, Athlete Name, and Academy Name.
+    results = collect_modern_page_results(athlete_results)
 
-
-    #Splitting Out div Tags that contain lists. These list tags contain the table like objects that include Placing, Athlete Name, Athlete Academy.
-    #They have children div tags with class athlete-item. One for each competitor result.
-    #Athelte item div tags contain two children div tags:
-    #1.Class = position-athlete contains placing.
-    #2.Class = name contains two elements: Athlete Name, Academy name. Which are stored under P and Span children tags.
-
-    #Declare List to Store Placing information. Placings, Athlete Names, and Academy Names.
-    Results = []
-    #Declaring List that is used, to store one set of Placings, Athlete Names, and Academy Names before being placed in the Results list.
-    Sublist = []
-
-
-    #Getting All List tags
-    ListTags = athlete_results.find_all("div", class_ = "list")
-    #Loop through each list tag
-    for ListT in ListTags:
-        #Pull Out Athlete Item tags
-        AthleteItems = ListT.find_all("div", class_ = "athlete-item")
-        #Loop through each Athlete Item tag Picking out my individual Results elements from the Tag.
-        for Item in AthleteItems:
-                #Get tag that contains Placing
-                Placing = Item.find("div",class_ = "position-athlete")
-                #Access the contenets where the placing number is held.
-                Placing = Placing.contents[0]
-                #Strip whitespace and add to sublist
-                Sublist.append(Placing.strip())
-                #Get p tag that contains both athlete and school name
-                Ptag = Item.find("p")
-                #Acess Athlete name from P tag
-                AthName = Ptag.contents[0]
-                #Strip white space and add to sublist.
-                Sublist.append(AthName.strip())
-                #Out of the p tag get the span tag containing Academy name
-                AcademyName = Ptag.find("span")
-                #Get AcademyName string, strip whitespace, and add to sublist.
-                Sublist.append(AcademyName.string.strip())
-        #Append Sublist Variable to Results list and then clear the sublist.
-        Results.append(Sublist)
-        Sublist = []
-
-
-
-    #Empty df to be filled with scraped data.
-    # df = create_standard_tournament_df()
-    df = pd.DataFrame( columns=['Age','Belt','Gender','Weight Class','Placing','Competitor Name','Academy Name'])
-
-
-
-    #FIXME Shared across both functions
-    # will use build rows functions but need to refactor earlier sections of code first.
-    # full_rows = build_rows_of_data(division_categories, results)
-    #Looping through the two lists that contain data. Accessing them to build one row of data at a time and
-    #adding it to the data frame.
-    x = 0
-    #FIXME Two webpage formats are not actually in the same order. Make change where I use dictionaries instead of lists. HERE
-    while x < len(division_categories):
-        #Access results list at the same position we are accessing divisions list and store in a variable.
-        ResultsSplit = Results[x]
-        #A list object im getting from the Results array can be anywhere from 2 competitors to 4, but a result will always include 3 elements: Placing, Name, Academy Name.
-        #So I am accessing the first 3 elements of the Results Split list. Adding them to my new row,
-        #and then taking them out of the ResultsSplit list until the results split list has nothing left in it.
-        while len(ResultsSplit) != 0:
-            NewRow = []
-            NewHeader = division_categories[x]
-            for Header in NewHeader:
-                #Some strings have white spaces. Stripping strings before storing.
-                NewRow.append(Header.strip())
-            IndiviualResult = ResultsSplit[0:3]
-            for Result in IndiviualResult:
-                NewRow.append(Result.strip())
-            df.loc[len(df)] = NewRow
-            del ResultsSplit[0:3]
-
-        x += 1
-
+    full_rows = build_rows_of_data(division_categories, results)
+    df = create_standard_tournament_df(full_rows)
 
     df = filter_to_blackbelt_adult(df)
 
-
-
-    #Getting the title that contains both tournament name and year.
-    Title = Soup.find_all("h2",class_ = "title")
-    Title = Title[1]
-    Title = Title.string.strip()
-
-    #Using title element of the Soup to get year of tournament and adding to the data frame.
-    #Year is always the last 4 characters of the title string.
-    Year = Title[-4:]
-    df['Year'] = Year
-
-    #Using the title element of the Soup to get the tournament name and adding to the data frame.
-    #Tournament name is always the title string until the 4th to last character.
-    Tournament = Title[:-4]
-    df['Tournament'] = Tournament
-
-
-
+    #Set year and tournament name using title.
+    page_title = get_modern_page_title(Soup) 
+    df['Year'] = page_title[-4:]
+    df['Tournament'] = page_title[:-4]
 
     df = df.reset_index(drop = True)
+
     return df
 
-def parse_legacy_division_categories(athlete_results):
+def collect_legacy_division_categories(athlete_results):
     # Parse through legacy webpage athlete results data.
     # Pulling out division header info: age, belt, gender, weight.
     # Returning all division headers.
@@ -167,8 +79,36 @@ def parse_legacy_division_categories(athlete_results):
 
     return divisions
 
-def collect_page_results(athlete_results):
-    # Pull out table objects from web page, and parse through them collecting resutls information.
+def collect_modern_division_categories(athlete_results):
+    # Parse through legacy webpage athlete results data.
+    # Pulling out division header info: age, belt, gender, weight.
+    # Returning all division headers.
+    # I.e. adult, blue, male, middle
+    #      adult, blue, male, heavy
+
+    #Grab tags that contain division info.
+    category_tags =  athlete_results.find_all("h4", class_ = "subtitle")
+
+    divisions = []
+
+    for category in category_tags:
+
+        #Cateogry contents contain age, belt, gender, weight.
+        #Contents contain category info in multiple formats. Pull the best format.
+        category_contents = category.contents
+        category_contents = category_contents[1]
+
+        #Strings need to be split, reordered, and then stripped of line returns to get a clean division list.
+        category_contents = category_contents.split("/")
+        category_contents = reorder_modern_division_category(category_contents)
+        category_contents = [content.strip() for content in category_contents]
+
+        divisions.append(category_contents)
+
+    return divisions
+
+def collect_legacy_page_results(athlete_results):
+    # Pull out table objects from web page, and parse through them collecting results information.
 
     # Grab Tags that contain Tbodies aka tables.
     result_tables = athlete_results.find_all("tbody")
@@ -176,17 +116,17 @@ def collect_page_results(athlete_results):
     #List to Store Placing information. Placing, Athlete Name, and Academy Name.
     results = []
 
-    for tag in result_tables:
+    for table in result_tables:
         #Pull Out td children tags containing Placing, Athlete Name, and Academy Name.
-        td_tags = tag.find_all("td")
-        individual_table_results = collect_individual_table_results(td_tags)
+        td_tags = table.find_all("td")
+        individual_table_results = collect_individual_legacy_table_results(td_tags)
 
         results.append(individual_table_results)
 
     return results
 
-def collect_individual_table_results(td_tags):
-    #Colles all rows of an individual tournament results table object.
+def collect_individual_legacy_table_results(td_tags):
+    #Collect all rows of an individual tournament results table object.
 
     individual_table = []
 
@@ -212,6 +152,59 @@ def collect_individual_table_results(td_tags):
                 #Some Athletes do not have an affiliated academy, in those instances you get a return of none,
                 #converting to string data type to prevent error.
                 individual_table.append(str(div.string))
+
+    return individual_table
+
+def collect_modern_page_results(athlete_results):
+    # Pull out table objects from web page, and parse through them collecting results information.
+
+    #Stores Placing information. I.e. Placings, Athlete Names, and Academy Names.
+    results = []
+
+    # List tags are table like objects.
+    result_tables = athlete_results.find_all("div", class_ = "list")
+
+    for current_table in result_tables:
+        individual_table_results = collect_individual_modern_table_results(current_table)
+        results.append(individual_table_results)
+
+    return results
+
+def reorder_modern_division_category(category_contents):
+    # Reorder contents of the category so it matches the order used in the legacy web pages.
+    # I.e. Change order of Age, Gender, Belt, Weight Class to Age, Belt, Gender, Weight Class
+    # Allows for reuse of more functions across both web page formats.
+
+    gender = category_contents[1]
+    belt = category_contents[2]
+    category_contents[1] = belt
+    category_contents[2] = gender
+
+    return category_contents
+
+def collect_individual_modern_table_results(table):
+    #Collect all rows of a modern webpage individual tournament results table object.
+
+    individual_table = []
+
+    #Pull Out Athlete Item tags. I.e. Rows of the table.
+    athlete_items = table.find_all("div", class_ = "athlete-item")
+
+    for item in athlete_items:
+        #Get tag that contains Placing
+        placing = item.find("div",class_ = "position-athlete")
+        placing = placing.contents[0]
+        individual_table.append(placing.strip())
+
+        #p tags contains both athlete and school name
+        p_tag = item.find("p")
+
+        athlete_name = p_tag.contents[0]
+        individual_table.append(athlete_name.strip())
+
+        academy_name = p_tag.find("span")
+        individual_table.append(academy_name.string.strip())
+
 
     return individual_table
 
@@ -275,7 +268,7 @@ def filter_to_blackbelt_adult(df):
     
     return df
 
-def get_tournament_name(Soup):
+def get_legacy_tournament_name(Soup):
     #Using the title element of the Soup to get the tournament name.
     tournament_name = Soup.title.string
 
@@ -283,7 +276,7 @@ def get_tournament_name(Soup):
     tournament_name = tournament_name[:-13]
     return tournament_name
 
-def get_tournament_year(Soup):
+def get_legacy_tournament_year(Soup):
     #Using title element of the Soup to get year of the tournament.
 
     #Title element contains both year of tournament and tournament name.
@@ -292,46 +285,10 @@ def get_tournament_year(Soup):
     tournament_year = tournament_year[-3]
     return tournament_year
 
+def get_modern_page_title(Soup):
+    # Getting the title that contains both tournament name and year.
+    title = Soup.find_all("h2",class_ = "title")
+    title = title[1]
+    title = title.string.strip()
 
-
-#FIXME new functios I added while refactoring modern scrape.
-def parse_modern_division_categories(athlete_results):
-    # Parse through legacy webpage athlete results data.
-    # Pulling out division header info: age, belt, gender, weight.
-    # Returning all division headers.
-    # I.e. adult, blue, male, middle
-    #      adult, blue, male, heavy
-
-    #Grab tags that contain division info.
-    category_tags =  athlete_results.find_all("h4", class_ = "subtitle")
-
-    divisions = []
-
-    for category in category_tags:
-
-        #Cateogry contents contain age, belt, gender, weight.
-        #Contents contain category info in multiple formats. Pull the best format.
-        category_contents = category.contents
-        category_contents = category_contents[1]
-
-        #Strings need to be split, reordered, and then stripped of line returns to get a clean division list.
-        category_contents = category_contents.split("/")
-        category_contents = reorder_modern_division_category(category_contents)
-        category_contents = [content.strip() for content in category_contents]
-
-        divisions.append(category_contents)
-
-    return divisions
-
-
-def reorder_modern_division_category(category_contents):
-    # Reorder contents of the category so it matches the order used in the legacy web pages.
-    # I.e. Change order of Age, Gender, Belt, Weight Class to Age, Belt, Gender, Weight Class
-    # Allows for reuse of more functions across both web page formats.
-
-    gender = category_contents[1]
-    belt = category_contents[2]
-    category_contents[1] = belt
-    category_contents[2] = gender
-
-    return category_contents
+    return title

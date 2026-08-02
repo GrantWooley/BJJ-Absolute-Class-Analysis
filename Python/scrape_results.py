@@ -54,12 +54,12 @@ def scrape_webpage(tournament_url):
     #Select appropriate webscraping method based on url.
     if check_url[1] == 'PublicResults':
 
-        df = sc.ModernScrape(Soup)
+        df = sc.scrape_modern_web_page(Soup)
         return df
 
     else:
 
-        df = sc.LegacyScrape(Soup)
+        df = sc.scrape_legacy_web_page(Soup)
         return df
 
 
