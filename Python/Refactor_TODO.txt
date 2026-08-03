@@ -1,18 +1,17 @@
 As I start refactor of Webscraper create new branch and practice making a PR.
- Add requirement.txt file for python.
- When refactoring python, make sure it matches PEP 8.
- Refactor scraper funcitons file.
 
-
-User Ruff after I finish refactors to make sure my code is clean in pep 8.
 
 Adjust main function to put out a singular file per Major Tournament.
+    -R code just picks up all the files. It doesn't pay attention to name.
 
-As I'm refactoring I'm noting web page caseing isn't consistent sometimes full upercase sometimes full lower case sometimes normal capital case.
-Make sure my data clenaing handles this.
+#Get the main webpage Beautiful soup object.
+#For tournament in tournaments.
+    #Get results urls for Individual tournament.
+    #Scrape all the pages for that tournament.
+    #Adding each df to a list.
+    #concat the dfs.
+    #save the file.
 
-Make sure my functions are marked as private or public.
+ What if I scrape the result webpage once and I store all my links in a dictionary?
 
-After I finish refactoring make sure I order my functions in a logical way.
 
-Update function names from LegacyScrape to legacy_scrape. or scrape_legacy_webpage
