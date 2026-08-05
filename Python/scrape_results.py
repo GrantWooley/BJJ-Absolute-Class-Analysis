@@ -129,9 +129,9 @@ def main():
 
         _save_tournament_results_file(df)
 
-        print("Finished Scraping for: " + tournament)
+        print("Finished Scraping for: " + tournament + "\n")
 
-    print("All Web Pages Successfully Scraped!\n")
+    print("All Web Pages Successfully Scraped!")
 
 
 
