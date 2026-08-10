@@ -3,7 +3,7 @@
 #| message: false
 library(dplyr)
 source("R/0.1_Setup.R")
-dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
+dt_Absolute_Results <- readRDS(file.path(Path_Data_Processed,File_Absolute_Results))
 
 ```
 
@@ -13,9 +13,7 @@ format: html
 editor: visual
 ---
 
-## [Definitions:]{.underline} 
-
-
+## [Definitions:]{.underline}
 
 **Brazilian Jiu Jitsu (BJJ)** - A self-defense system, martial art, and combat sport based on grappling, ground fighting, and submission holds. [Learn More](https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu)
 
@@ -23,9 +21,7 @@ editor: visual
 
 **Gi Jiu Jitsu** - In Gi Jiu Jitsu a Gi sometimes called a kimono is worn. Being a heavy-duty uniform consisting of a jacket, pants, and belts. Grabbing or gripping the gi and belt is allowed and used for performing various techniques and submissions. Gi Jiu Jitsu is the older and more traditional form of Jiu Jitsu. Often considered slower and more methodical in comparison to No-Gi due to the gripping involved and is more heavily influenced by [Judo](https://en.wikipedia.org/wiki/Judo) than No-Gi.
 
-![~Beginning of a berimbolo sequence in a Gi competition.~](img/bjj_gi.jpg){fig-align="center" width="875"}
-<span id="def_nogi-anchor"></span>
-**No-Gi Jiu Jitsu** - In No-Gi Jiu Jitsu spandex clothing is worn consisting of a rashguard (top), shorts, and sometimes spats (tights). In No-Gi gripping of the uniform is not allowed. No-Gi is considred faster and more dynamic than Gi Jiu Jitsu, has a wider range of legal submissions (leglocks), and is more heavily influenced by [Wrestling](Wrestling) than Gi Jiu Jitsu.
+![Beginning of a berimbolo sequence in a Gi competition.](img/bjj_gi.jpg){fig-align="center" width="875"} **No-Gi Jiu Jitsu** - In No-Gi Jiu Jitsu spandex clothing is worn consisting of a rashguard (top), shorts, and sometimes spats (tights). In No-Gi gripping of the uniform is not allowed. No-Gi is considred faster and more dynamic than Gi Jiu Jitsu, has a wider range of legal submissions (leglocks), and is more heavily influenced by [Wrestling](Wrestling) than Gi Jiu Jitsu.
 
 ![~Rear Naked Choke being performed in  a No-Gi competition.~](img/bjj_nogi.jpeg){fig-align="center"}
 
