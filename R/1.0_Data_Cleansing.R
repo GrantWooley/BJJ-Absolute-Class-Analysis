@@ -1,14 +1,5 @@
 #Script used to clean the scraped data.
-rm(list = ls())
 
-library(data.table)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(purrr)
-library(here)
-
-source(here("R","Vars.R"))
 
 dt_IBJFF_Weight_Classes <- data.table(
   Type = c("GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI",

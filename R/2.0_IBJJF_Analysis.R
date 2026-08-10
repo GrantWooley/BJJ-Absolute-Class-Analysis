@@ -1,15 +1,4 @@
 #Script to do analysis after initial data cleansing.
-rm(list = ls())
-
-library(here)
-library(data.table)
-library(dplyr)
-library(ggplot2)
-library(scales)
-library(forcats)
-library(purrr)
-
-source(here("R","Vars.R"))
 
 List_Plots <- list()
 
