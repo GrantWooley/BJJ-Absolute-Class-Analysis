@@ -1,6 +1,5 @@
 #Contains common Vars across R scripts.
 
-
 library(here)
 #forcats needs to be inlcuded in setup file. During Quarto file render, one of the plot objects that are
 #loaded has a forcats function that is called in the plot object.
