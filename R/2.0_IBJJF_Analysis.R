@@ -2,8 +2,8 @@
 
 List_Plots <- list()
 
-dt_Results <- readRDS(file.path(Path_Data,File_Results))
-dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
+dt_Results <- readRDS(file.path(Path_Data_Processed,File_Results))
+dt_Absolute_Results <- readRDS(file.path(Path_Data_Processed,File_Absolute_Results))
 
 #Before starting my actual analysis my hypothesis is the following:
 #It is not realistic for a competitor to win the Absolute regardless of their weight and size. I believe that there is a natural cut off

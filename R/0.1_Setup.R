@@ -7,7 +7,8 @@ library(forcats)
 
 Path_Main <- file.path(here())
 Path_Data <- file.path(Path_Main,"data")
-Path_Data_Raw <- file.path(Path_Main,"data","raw_data")
+Path_Data_Raw <- file.path(Path_Data,"raw_data")
+Path_Data_Processed <- file.path(Path_Data,"processed_data")
 Path_Plots <- file.path(Path_Data,"plots")
 
 File_Results <- "IBJJF_Results_Weight_Class.rds"

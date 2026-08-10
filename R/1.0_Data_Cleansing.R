@@ -209,5 +209,5 @@ dt_Absolute_Results <- dt_Absolute_Results[, Weight_Class := factor(Weight_Class
 setorder(dt_Results,Type,Tournament,Year, Placing)
 setorder(dt_Absolute_Results,Type,Tournament,Year, Placing_Absolute)
 
-saveRDS(dt_Results,file.path(Path_Data,File_Results))
-saveRDS(dt_Absolute_Results,file.path(Path_Data,File_Absolute_Results))
+saveRDS(dt_Results,file.path(Path_Data_Processed,File_Results))
+saveRDS(dt_Absolute_Results,file.path(Path_Data_Processed,File_Absolute_Results))
