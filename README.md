@@ -32,6 +32,7 @@ Python is used to perform ETL of the IBJJF Tournament results.
 1. The tournament data is extracted via web scraping tournament results directly from IBJJF's website: [IBJJF Results](https://ibjjf.com/events/results)
 2. Basic transformations and filters are done on the tournament data. Balancing keeping the data raw and close to source, while making it more analysis-friendly.
 3. Tournament data is then loaded into `.csv` files for easy ingestion of analysis code.
+   - The raw dataset can be found on Kaggle: [IBJJF Major Tournament Black Belt Results](https://www.kaggle.com/datasets/grantwooley/ibjjf-major-tournament-black-belt-results)
 
 ### 2. Data Analysis 📊
 
