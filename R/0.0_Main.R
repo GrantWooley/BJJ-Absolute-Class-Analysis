@@ -18,4 +18,4 @@ source(here("R", "1.0_Data_Cleansing.R"))
 print("Run Analysis and Produce Plots")
 source(here("R", "2.0_IBJJF_Analysis.R"))
 
-print("Analysis finsihed, ready for Quarto to be ran.")
+print("Analysis finsihed, ready for Quarto site to rendered.")
