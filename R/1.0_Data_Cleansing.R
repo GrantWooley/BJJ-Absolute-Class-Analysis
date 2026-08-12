@@ -49,6 +49,10 @@ dt_Results <- bind_rows(dt_Results) %>% setDT()
 dt_Results <- dt_Results %>%
   rename_with( ~ gsub(" ","_", .x))
 
+# In 2009 for the CAMPEONATO BRASILEIRO DE JIU JITSU tournament. Several Female divisions only had one entrance. They were not given a placing. However by default they would have placed 1st.
+# Correcting these NAs before cating placing column to numeric. Prevents NAs by coercion warning.
+dt_Results <- dt_Results[Placing == "None" & Tournament == "Campeonato Brasileiro de Jiu-Jitsu" & Year == "2009", Placing := "1"]
+
 dt_Results <- dt_Results[, `:=`(
   Placing = as.numeric(Placing),
   Weight_Class = case_when(
@@ -81,9 +85,7 @@ dt_Results <- dt_Results[ ,`:=`(
 )
 ]
 
-# In 2009 for the CAMPEONATO BRASILEIRO DE JIU JITSU tournament. Several Female divisions only had one entrance. They were not given a placing. However by default they would have placed 1st.
-# Correcting these NAs.
-dt_Results <- dt_Results[is.na(Placing) & Tournament == "CAMPEONATO BRASILEIRO DE JIU JITSU" & Year == "2009", Placing := 1]
+
 
 dt_Results <- dt_Results[, Type := case_when(
   Tournament %like% "NO GI" ~ "NO-GI",
