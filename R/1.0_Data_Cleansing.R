@@ -87,8 +87,6 @@ dt_Results <- dt_Results[ ,`:=`(
 )
 ]
 
-
-
 dt_Results <- dt_Results[, Type := case_when(
   Tournament %like% "NO GI" ~ "NO-GI",
   Tournament %like% "SEM KIMONO" ~ "NO-GI",
@@ -217,7 +215,7 @@ dt_Absolute_Results <- dt_Absolute_Results[,.(Year,Tournament,Type,Belt,Gender,A
 dt_Absolute_Results <- distinct(dt_Absolute_Results)
 
 #Final Clean Up before saving data.
-dt_Results <- dt_Results[Weight_Class != "ABOSLUTE"]
+dt_Results <- dt_Results[Weight_Class != "ABSOLUTE"]
 Factor_Order <- c(NA,"ROOSTER","LIGHT FEATHER","FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY","SUPER HEAVY","ULTRA HEAVY")
 dt_Results <- dt_Results[, Weight_Class := factor(Weight_Class, levels = Factor_Order)]
 dt_Absolute_Results <- dt_Absolute_Results[, Weight_Class := factor(Weight_Class, levels = Factor_Order)]
