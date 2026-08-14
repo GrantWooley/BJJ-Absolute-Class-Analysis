@@ -1,28 +1,30 @@
 # Script used to clean the raw data and save into .rds files for analysis.
 
-dt_IBJFF_Weight_Classes <- data.table(
-  Type = c("GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI",
-           "NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI"),
-  Age = c("Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult",
-          "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult"),
+dt_IBJJF_Weight_Classes <- data.table(
+  Type = c("GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI","GI",
+           "NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI","NO-GI"),
+  Age = c("Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult",
+          "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult", "Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult","Adult"),
   Gender = c("Male","Male","Male","Male","Male","Male","Male","Male","Male",
-             "Female","Female","Female","Female","Female","Female","Female","Female",
+             "Female","Female","Female","Female","Female","Female","Female","Female", "Female",
              "Male","Male","Male","Male","Male","Male","Male","Male","Male",
-             "Female","Female","Female","Female","Female","Female","Female","Female"),
+             "Female","Female","Female","Female","Female","Female","Female","Female", "Female"),
   Weight_Class = c("ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
-                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY",
                    "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
-                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY"),
-  # For Super Heavy Female, and Ultra Heavy Male there is no actual weight defined by IBJJF. It is uncapped, but to make time series
-  # plots work correctly we need to declare an actual weight. I took the average weight difference between each Type/Gender category
+                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY", "ULTRA HEAVY",
+                   "ROOSTER","LIGHT FEATHER", "FEATHER", "LIGHT","MIDDLE","MEDIUM HEAVY","HEAVY", "SUPER HEAVY","ULTRA HEAVY"),
+  # For Super Heavy Female, Ultra Heavy Female, and Ultra Heavy Male there is no actual weight defined by IBJJF. It is uncapped.
+  # Ultra Heavy Female only shows up in older tournament records. Perhaps in the past Super Heavy Female was not an uncapped weight class, but later Ultra Heavy got elminated
+  # and Super Heavy became the new top weight class for the female divisons.
+  # To make time series plots work correctly we need to declare an actual weight. I took the average weight difference between each Type/Gender category
   # combination to set the weight for Super Heavy and Ultra Heavy. This biases some of the analysis in favor of lighter competitors/weights.
   # I think this bias is acceptable to produce good time series plots.
   Weight = c(127.0,141.6,154.6,168.0,181.6,195.0,208.0,222.0, 236.0,
-             107.0,118.0,129.0,141.6,152.6,163.6,175.0, 186.4,
+             107.0,118.0,129.0,141.6,152.6,163.6,175.0, 186.4, 197.8,
              122.6,136.0,149.0,162.6,175.6,188.6,202,215,228.0,
-             103.0,114.0,125.0,136.0,147.0,158.0,169.0,180.0)
+             103.0,114.0,125.0,136.0,147.0,158.0,169.0,180.0, 191)
 )
-dt_IBJFF_Weight_Classes <- dt_IBJFF_Weight_Classes[, UOM := "lbs"]
+dt_IBJJF_Weight_Classes <- dt_IBJJF_Weight_Classes[, UOM := "lbs"]
 
 
 Files_Raw_Data <- list.files(Path_Data_Raw)
@@ -113,7 +115,7 @@ dt_Results <- dt_Results[Type == "NO-GI", Tournament := case_when(
 ]
 
 
-dt_Results <- dt_IBJFF_Weight_Classes[dt_Results, on = c("Weight_Class","Gender", "Type","Age")]
+dt_Results <- dt_IBJJF_Weight_Classes[dt_Results, on = c("Weight_Class","Gender", "Type","Age")]
 
 # Join together our data to get the weight of each Absolute compteitor.
 dt_Absolute_Results <- dt_Results[Weight_Class == "ABSOLUTE"]
