@@ -22,8 +22,9 @@ dt_Absolute_Results <- readRDS(file.path(Path_Data_Processed,File_Absolute_Resul
 Valid_Types <- c('GI','NO-GI')
 Valid_Age <- 'Adult'
 Valid_Genders <- c('Male','Female')
-Valid_Weight_Classes <- c('LIGHT FEATHER','FEATHER','LIGHT','MIDDLE','MEDIUM HEAVY','HEAVY','SUPER HEAVY','ULTRA HEAVY','ROOSTER')
-Valid_UOM  <- 'lbs'
+# NAs acceptable for these two categoires. For some competitiors there is no way to determine their weight class. I.e. They only ever have records competing in the Open class.
+Valid_Weight_Classes <- c('LIGHT FEATHER','FEATHER','LIGHT','MIDDLE','MEDIUM HEAVY','HEAVY','SUPER HEAVY','ULTRA HEAVY','ROOSTER', NA)
+Valid_UOM  <- c('lbs', NA)
 Valid_Tournaments <- c(
   'WORLD IBJJF JIU JITSU CHAMPIONSHIP',
   'WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP',
