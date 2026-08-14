@@ -75,7 +75,9 @@ dt_Results <- dt_Results[, `:=`(
     Gender == "Feminino" ~ "Female",
     .default = Gender
   ),
-  Age = ifelse(Age == "Adulto","Adult",Age)
+  Age = ifelse(Age == "Adulto","Adult",Age),
+  Belt = ifelse(Belt == "Preta","Black",Belt)
+
 )
 ]
 
