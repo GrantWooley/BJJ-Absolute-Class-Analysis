@@ -11,8 +11,89 @@ library(purrr)
 
 source(here("R", "0.1_Setup.R"))
 
-dt_Results <- readRDS(file.path(Path_Data,File_Results))
-dt_Absolute_Results <- readRDS(file.path(Path_Data,File_Absolute_Results))
+dt_Results <- readRDS(file.path(Path_Data_Processed,File_Results))
+dt_Absolute_Results <- readRDS(file.path(Path_Data_Processed,File_Absolute_Results))
+
+# NAs to figure out if thats aboslute or what that is.
+
+# Expected Values ####
+# Validate all values in cleaned data.tables are expected.
+
+Valid_Types <- c('GI','NO-GI')
+Valid_Age <- 'Adult'
+Valid_Genders <- c('Male','Female')
+Valid_Weight_Classes <- c('LIGHT FEATHER','FEATHER','LIGHT','MIDDLE','MEDIUM HEAVY','HEAVY','SUPER HEAVY','ULTRA HEAVY','ROOSTER')
+Valid_UOM  <- 'lbs'
+Valid_Tournaments <- c(
+  'WORLD IBJJF JIU JITSU CHAMPIONSHIP',
+  'WORLD IBJJF JIU JITSU NO GI CHAMPIONSHIP',
+  'PAN IBJJF JIU JITSU CHAMPIONSHIP',
+  'PAN IBJJF JIU JITSU NO GI CHAMPIONSHIP',
+  'EUROPEAN IBJJF JIU JITSU CHAMPIONSHIP',
+  'EUROPEAN IBJJF JIU JITSU NO GI CHAMPIONSHIP',
+  'BRAZILIAN NATIONAL IBJJF JIU JITSU CHAMPIONSHIP',
+  'BRAZILIAN NATIONAL JIU JITSU NO GI CHAMPIONSHIP'
+)
+# Purple Brown Black and Brown Black categoires are from earlier tournament years where Female divisions were often merged across belt levels.
+Valid_Belts <- c('Black','Purple Brown Black', 'Brown Black')
+Valid_Placings <- c(1,2,3)
+
+# Validate all values in a column are pre-defined expected values.
+Validate_Column <- function (dataTable, columnName, expectedValues){
+  dataTable %>%
+    summarise(all_valid = all({{columnName}} %in% expectedValues)) %>%
+    pull() %>%
+    return()
+
+}
+
+dt_data_quality_checks <- data.table(
+  Data_Table = c('dt_Results', 'dt_Absolute_Results'),
+  Type_Valid = c(),
+  Age_Valid = c(),
+  Gender_Valid = c(),
+  Weight_Class_Valid = c(),
+  UOM_Valid = c(),
+  Tournament_Valid = c(),
+  Belt_Valid = c(),
+  Placing_Valid = c()
+
+)
+
+
+dt_data_quality_checks[Data_Table == 'dt_Results', Type_Valid := Validate_Column(dt_Results,Type,Valid_Types)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Age_Valid := Validate_Column(dt_Results,Age,Valid_Age)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Gender_Valid := Validate_Column(dt_Results,Gender,Valid_Genders)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Weight_Class_Valid := Validate_Column(dt_Results,Weight_Class,Valid_Weight_Classes)]
+dt_data_quality_checks[Data_Table == 'dt_Results', UOM_Valid := Validate_Column(dt_Results,UOM,Valid_UOM)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Tournament_Valid := Validate_Column(dt_Results,Tournament,Valid_Tournaments)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Belt_Valid := Validate_Column(dt_Results,Belt,Valid_Belts)]
+dt_data_quality_checks[Data_Table == 'dt_Results', Placing_Valid := Validate_Column(dt_Results,Placing,Valid_Placings)]
+
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Type_Valid := Validate_Column(dt_Absolute_Results,Type,Valid_Types)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Age_Valid := Validate_Column(dt_Absolute_Results,Age,Valid_Age)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Gender_Valid := Validate_Column(dt_Absolute_Results,Gender,Valid_Genders)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Weight_Class_Valid := Validate_Column(dt_Absolute_Results,Weight_Class,Valid_Weight_Classes)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', UOM_Valid := Validate_Column(dt_Absolute_Results,UOM,Valid_UOM)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Tournament_Valid := Validate_Column(dt_Absolute_Results,Tournament,Valid_Tournaments)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Belt_Valid := Validate_Column(dt_Absolute_Results,Belt,Valid_Belts)]
+dt_data_quality_checks[Data_Table == 'dt_Absolute_Results', Placing_Valid := Validate_Column(dt_Absolute_Results,Placing_Absolute,Valid_Placings)]
+
+
+
+if (any(dt_data_quality_checks == FALSE)) {
+  print(dt_data_quality_checks)
+  stop("Validation failed, unexpected values. Investigate.")
+}
+
+
+
+# Preta value in belt need to fix this.
+# NA values Wieght_Class, UOM_Valid
+dt_Results %>% distinct(Placing)
+
+dt_Results %>% filter(Belt == 'Preta') %>%
+
 
 dt_Absolute_Results %>% sample_n(10)
 
@@ -81,3 +162,15 @@ dt_Check <- dt_Results %>% filter(Tournament == "BRAZILIAN NATIONAL IBJJF JIU JI
 
 
 #Need to code up a check that looks at distinct value per group. I'm seeing some columns like Belt where I've missed some translation.
+dt_Results %>% colnames()
+
+
+
+dt_Results %>% distinct(Belt)
+
+
+
+
+
+
+#Some type of NA check maybe.
