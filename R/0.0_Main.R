@@ -23,4 +23,4 @@ source(here("R", "2.0_IBJJF_Analysis.R"))
 print("Run Data Quality Checks")
 source(here("R", "3.0_DQC.R"))
 
-print("Analysis finsihed, ready for Quarto site to rendered.")
+print("Analysis finsihed, ready for Quarto site to be rendered.")
