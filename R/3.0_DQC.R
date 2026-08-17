@@ -1,4 +1,4 @@
-#Script to do analysis after initial data cleansing.
+# Data Quality Checks
 rm(list = ls())
 
 library(here)
@@ -14,7 +14,6 @@ source(here("R", "0.1_Setup.R"))
 dt_Results <- readRDS(file.path(Path_Data_Processed,File_Results))
 dt_Absolute_Results <- readRDS(file.path(Path_Data_Processed,File_Absolute_Results))
 
-# NAs to figure out if thats aboslute or what that is.
 
 # Expected Values ####
 # Validate all values in cleaned data.tables are expected.
@@ -89,89 +88,40 @@ if (any(dt_data_quality_checks == FALSE)) {
 
 
 
-# Preta value in belt need to fix this.
-# NA values Wieght_Class, UOM_Valid
-dt_Results %>% distinct(Placing)
 
-dt_Results %>% filter(Belt == 'Preta') %>%
+# Row Count Checks ####
 
+# Regular Results dt Check #
 
-dt_Absolute_Results %>% sample_n(10)
+# 9 possible weight classes * 4 placings max per weight class = 36 placings/rows per gender category.
+max_row_count_tournamnet_year_gender <- 36
+# Some early tournamnet years have a pretty low row count but with tournamnets now being large we should never see a super low row count for future tournaments.
+min_tournament_row_count <- 10
 
-dt_Results %>% sample_n(10)
-
-summary(dt_Absolute_Results)
-glimpse(dt_Absolute_Results)
-
-
-sum_stats <- function(df) {
-      df %>% group_by(Tournament) %>%
-        summarize(
-          n = n(),
-          n_age = n_distinct(Age),
-          n_gender = n_distinct(Gender),
-          n_weight_class = n_distinct(Weight_Class),
-          # min_weight_class = min(Weight_Class),
-          # max_weight_class = max(Weight_Class),
-          n_weight = n_distinct(Weight),
-          min_weight = min(Weight),
-          avg_weight = mean(Weight),
-          max_weight = max(Weight),
-          n_year = n_distinct(Year),
-          min_year = min(Year),
-          # median_year = median(Year),
-          max_year = max(Year),
-
-          n_belt = n_distinct(Belt),
-          n_distinct_placing = n_distinct(Placing),
-          min_placing = min(Placing),
-          median_placing = median(Placing),
-          max_placing = max(Placing),
-          n_name = n_distinct(Competitor_Name),
-          n_academy = n_distinct(Academy_Name)
+dt_Gender_Row_Count <- dt_Results %>% group_by(Tournament,Year, Gender) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year, Gender)
+dt_Year_Row_Count<- dt_Results %>% group_by(Tournament,Year) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year)
 
 
-        )
+if (any(dt_Gender_Row_Count$Row_Count > max_row_count_tournamnet_year_gender)) {
+  print(dt_Gender_Row_Count)
+  stop("Validation failed, greater than max number of expected rows in dt_Results.")
 }
 
-sum_stats(dt_Results)
 
-# Count NAs for all columns in the dataset
-dt_Results %>%
-  summarise(across(everything(), ~ sum(is.na(.))))
-
-dt_Results %>%
-  group_by(Tournament) %>%
-  summarise(
-           na_Type = sum(is.na(Type)),
-           na_Age = sum(is.na(Age)),
-           na_Gender = sum(is.na(Gender)),
-           na_Weight_Class = sum(is.na(Weight_Class)),
-           na_Weight = sum(is.na(Weight)),
-           na_UOM= sum(is.na(UOM)),
-           na_Year = sum(is.na(Year)),
-           na_Belt = sum(is.na(Belt)),
-           na_Placing = sum(is.na(Placing)),
-           na_Competitor_Name = sum(is.na(Competitor_Name)),
-  )
-
-# Count NAs in the 'column_name' variable
-dt_Results %>%
-  summarise(na_count = sum(is.na(Weight)))
-
-dt_Check <- dt_Results %>% filter(Tournament == "BRAZILIAN NATIONAL IBJJF JIU JITSU CHAMPIONSHIP")
+if (any(dt_Year_Row_Count$Row_Count < min_tournament_row_count)){
+  print(dt_Year_Row_Count)
+  stop("Validation failed, low record count for tournament year in dt_Results.")
+}
 
 
-#Need to code up a check that looks at distinct value per group. I'm seeing some columns like Belt where I've missed some translation.
-dt_Results %>% colnames()
+# Aboslute Results dt Check #
 
+# For the aboslute there should never be more than 4 placings.
+max_row_count_tournamnet_year_gender <- 4
 
+dt_Gender_Row_Count <- dt_Absolute_Results %>% group_by(Tournament,Year, Gender) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year, Gender)
 
-dt_Results %>% distinct(Belt)
-
-
-
-
-
-
-#Some type of NA check maybe.
+if (any(dt_Gender_Row_Count$Row_Count > max_row_count_tournamnet_year_gender)) {
+  print(dt_Gender_Row_Count)
+  stop("Validation failed, greater than max number of expected rows in dt_Absolute_Results.")
+}
