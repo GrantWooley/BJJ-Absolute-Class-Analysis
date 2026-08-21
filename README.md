@@ -1,4 +1,4 @@
-# BJJ Absolute Class Analysis
+# BJJ Absolute Class Analysis 🥋
 
 This project combines my passions for Brazilian Jiu Jitsu, Data Engineering, and Data Analysis.
 Using my data skills to answer the question:
