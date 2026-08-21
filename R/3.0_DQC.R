@@ -87,8 +87,6 @@ if (any(dt_data_quality_checks == FALSE)) {
 }
 
 
-
-
 # Row Count Checks ####
 
 # Regular Results dt Check #
@@ -98,8 +96,15 @@ max_row_count_tournamnet_year_gender <- 36
 # Some early tournamnet years have a pretty low row count but with tournamnets now being large we should never see a super low row count for future tournaments.
 min_tournament_row_count <- 10
 
-dt_Gender_Row_Count <- dt_Results %>% group_by(Tournament,Year, Gender) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year, Gender)
-dt_Year_Row_Count<- dt_Results %>% group_by(Tournament,Year) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year)
+dt_Gender_Row_Count <- dt_Results %>%
+  group_by(Tournament,Year, Gender) %>%
+  summarize(Row_Count = n(), .groups = "drop") %>%
+  arrange(Tournament, Year, Gender)
+
+dt_Year_Row_Count<- dt_Results %>%
+  group_by(Tournament,Year) %>%
+  summarize(Row_Count = n(), .groups = "drop") %>%
+  arrange(Tournament, Year)
 
 
 if (any(dt_Gender_Row_Count$Row_Count > max_row_count_tournamnet_year_gender)) {
@@ -119,7 +124,10 @@ if (any(dt_Year_Row_Count$Row_Count < min_tournament_row_count)){
 # For the aboslute there should never be more than 4 placings.
 max_row_count_tournamnet_year_gender <- 4
 
-dt_Gender_Row_Count <- dt_Absolute_Results %>% group_by(Tournament,Year, Gender) %>% summarize(Row_Count = n()) %>% arrange(Tournament, Year, Gender)
+dt_Gender_Row_Count <- dt_Absolute_Results %>%
+  group_by(Tournament,Year, Gender) %>%
+  summarize(Row_Count = n(), .groups = "drop") %>%
+  arrange(Tournament, Year, Gender)
 
 if (any(dt_Gender_Row_Count$Row_Count > max_row_count_tournamnet_year_gender)) {
   print(dt_Gender_Row_Count)
